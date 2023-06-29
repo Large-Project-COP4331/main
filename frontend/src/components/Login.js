@@ -24,7 +24,7 @@ function Login()
     {
         event.preventDefault();
 
-        var obj = {login:login.value,password:password.value};
+        var obj = {login:loginName.value,password:loginPassword.value};
         var js = JSON.stringify(obj);
 
         try
