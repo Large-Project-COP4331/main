@@ -42,25 +42,19 @@ app.post('/api/login', async (req, res, next) =>
  console.log({Login:login,Password:password});
  
 
-  /*console.log("1");
   const results = await db.collection('Users').find({Login:login,Password:password}).toArray();
-  console.log("2");
-  console.log(results);
-  console.log(results.length);
+  var id = '';
+  var fn = '';
+  var ln = '';
+  var em = '';
 
-  */
-  var id = 1;
-  var fn = 'Layne';
-  var ln = 'Mazur';
-  var em = debug;
-
-  /*if( results.length > 0 )
+  if( results.length > 0 )
   {
     id = results[0].UserID;
     fn = results[0].FirstName;
     ln = results[0].LastName;
     em = results[0].email;
-  } */
+  } 
  
   
   var ret = { id:id, firstName:fn, lastName:ln, email:em, error:''};
