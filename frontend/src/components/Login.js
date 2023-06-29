@@ -24,7 +24,7 @@ function Login()
     {
         event.preventDefault();
 
-        var obj = {login:loginName.value,password:loginPassword.value};
+        var obj = {login:login.value,password:password.value};
         var js = JSON.stringify(obj);
 
         try
@@ -46,7 +46,7 @@ function Login()
                 localStorage.setItem('user_data', JSON.stringify(user));
 
                 setMessage('');
-                window.location.href = '/cards';
+                window.location.href = '/oceanlogger';
             }
         }
         catch(e)
