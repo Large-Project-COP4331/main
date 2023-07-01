@@ -39,10 +39,10 @@ app.post('/api/login', async (req, res, next) =>
  var error = '';
 
  const { login, password } = req.body;
- console.log({Login:login,Password:password});
+ console.log({login:login,password:password});
  
 
-  const results = await db.collection('Users').find({Login:login,Password:password}).toArray();
+  const results = await client.db('OceanLogger').collection('Users').find({login:login,password:password}).toArray();
   var id = '';
   var fn = '';
   var ln = '';
@@ -51,8 +51,8 @@ app.post('/api/login', async (req, res, next) =>
   if( results.length > 0 )
   {
     id = results[0].UserID;
-    fn = results[0].FirstName;
-    ln = results[0].LastName;
+    fn = results[0].firstName;
+    ln = results[0].lastName;
     em = results[0].email;
   } 
  
