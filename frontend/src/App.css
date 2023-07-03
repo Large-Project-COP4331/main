@@ -36,3 +36,244 @@
     transform: rotate(360deg);
   }
 }
+
+#title{
+  background-color: white;
+  border-radius: 10px;
+	text-align: center;
+  padding: 10px 10px 10px 10px;
+  width: 33%;
+  margin-left: 33%;
+  margin-right: 33%;
+}
+
+#loginName
+{
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
+  margin: 10px 10px 10px 10px;
+}
+
+#loginPassword
+{
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
+  margin: 10px 10px 10px 10px;
+}
+
+#registerName
+{
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
+  margin: 10px 10px 10px 10px;
+}
+
+#registerPassword
+{
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
+  margin: 10px 10px 10px 10px;
+}
+
+#loggedInDiv{
+  border-radius: 10px;
+  background-color: green;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 10px 10px 10px;
+  width: 33%;
+  margin-left: 33%;
+  margin-right: 33%;
+  margin-bottom: 10px;
+}
+
+.loginRegisterBox{
+  background-color: white;
+  border-radius: 10px;
+}
+
+.loginRegisterToggle{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-style: solid solid none solid;
+  border-width: thin;
+  border-color: gray;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  width: 33%;
+  margin-left: 33%;
+  margin-right: 33%;
+  padding: 10px 10px 10px 10px;
+}
+
+.react-switch-checkbox {
+  height: 0;
+  width: 0;
+  visibility: hidden;
+}
+
+.react-switch-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  width: 175px;
+  height: 50px;
+  background: #339DFF;
+  border-radius: 10px;
+  position: relative;
+  transition: background-color .2s;
+  content:'Hello';
+}
+
+.react-switch-label .react-switch-button {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 81px;
+  height: 45px;
+  border-radius: 10px;
+  transition: 0.2s;
+  background: #0000FF;
+  box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
+}
+
+.react-switch-checkbox:checked + .react-switch-label .react-switch-button {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
+
+.react-switch-label:active .react-switch-button {
+  width: 60px;
+}
+
+.word {
+  display: block;
+  width: 200%;
+ 
+}
+
+.word:before,
+.word:after {
+  float: left;
+  width: 50%;
+  height: 36px;
+  padding: 0;
+  line-height: 36px;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+.word:before {
+  content: "LOGIN";
+  padding-left: 10px;
+  color: #fff;
+}
+.word:after {
+  content: "REGISTER";
+  padding-right: 10px;
+  color: #fff;
+  text-align: right;
+}
+
+#inner-title
+{
+  display: flex;
+  justify-content: center;
+}
+
+#loginDiv{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-style: none solid solid solid;
+  border-width: thin;
+  border-color: gray;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 33%;
+  margin-left: 33%;
+  margin-right: 33%;
+  padding: 10px 10px 10px 10px;
+}
+
+#registerDiv{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-style: none solid solid solid;
+  border-width: thin;
+  border-color: gray;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  width: 33%;
+  margin-left: 33%;
+  margin-right: 33%;
+  padding: 10px 10px 10px 10px;
+}
+
+.buttons{
+  border-radius: 10px;
+  color: white;
+  background: #339DFF;
+  border: 0;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.buttons:hover{
+  background: #0000FF;
+}
+
+#cardUIDiv{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 33%;
+  margin-left: 33%;
+  margin-right: 33%;
+  padding: 10px 10px 10px 10px;
+  border-radius: 10px;
+  background-color: red;
+}
+
+#searchText{
+  border-radius: 10px;
+}
+
+#cardText{
+  border-radius: 10px;
+}
+
+#cardSearchResult{
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  border-radius: 10px;
+}
+
+#cardList{
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  border-radius: 10px;
+}
+
+#cardAddResult{
+  background-color: white;
+  padding: 10px 10px 10px 10px;
+  border-radius: 10px;
+}
