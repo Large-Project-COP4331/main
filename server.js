@@ -36,17 +36,17 @@ app.post('/api/login', async (req, res, next) =>
   // incoming: login, password
   // outgoing: id, firstName, lastName, error
 	
- var error = '';
+ let error = '';
 
  const { login, password } = req.body;
  console.log({login:login,password:password});
  
 
   const results = await client.db('OceanLogger').collection('Users').find({login:login,password:password}).toArray();
-  var id = '';
-  var fn = '';
-  var ln = '';
-  var em = '';
+  let id = '';
+  let fn = '';
+  let ln = '';
+  let em = '';
 
   if( results.length > 0 )
   {
@@ -54,10 +54,44 @@ app.post('/api/login', async (req, res, next) =>
     fn = results[0].firstName;
     ln = results[0].lastName;
     em = results[0].email;
-  } 
- 
+  }
   
-  var ret = { id:id, firstName:fn, lastName:ln, email:em, error:''};
+  let ret = { id:id, firstName:fn, lastName:ln, email:em, error:''};
+  res.status(200).json(ret);
+});
+
+// Register API.
+app.post('/api/register', async (req, res, next) => 
+{
+  const {firstName, lastName, login, password, email} = req.body;
+
+  const database = client.db("OceanLogger").collection("Users");
+
+  // Check if the username already exists.
+  if (await database.findOne({login:login}) != null)
+  {
+    let ret = {id:"",firstName:"", lastName:"", email:"", error:"Username Already Exists."};
+    return res.status(200).json(ret);
+  }
+
+  // Add the info to the database.
+  let result = await database.insertOne
+  (
+    {
+      firstName:firstName,
+      lastName:lastName,
+      login:login,
+      password:password,
+      email:email,
+      verification:false
+    }
+  );
+
+  let id = result.insertedId;
+
+  // Returns this information. Can change this.
+  let ret = {id:id, firstName:firstName, lastName:lastName, email:email, error:""};
+
   res.status(200).json(ret);
 });
 
