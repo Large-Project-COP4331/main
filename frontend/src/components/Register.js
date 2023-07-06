@@ -2,20 +2,66 @@ import React, { useState } from 'react';
 
 function Register()
 {
-    var registerFirstName;
-    var registerLastName;
-    var registerUsername;
-    var registerPassword;
-    var registerEmail;
+    // Builds a path to the APIs on heroku or a local machine.
+    const app_name = 'oceanlogger-046c28329f84'
+    function buildPath(route)
+    {
+        if (process.env.NODE_ENV === 'production') 
+        {
+            return 'https://' + app_name +  '.herokuapp.com/' + route;
+        }
+        else
+        {        
+            return 'http://localhost:5000/' + route;
+        }
+    }
+    
+    let registerFirstName;
+    let registerLastName;
+    let registerUsername;
+    let registerPassword;
+    let registerEmail;
 
     const [message,setMessage] = useState('');
 
+    // Function to call the register API.
     const doRegister = async event => 
     {
         event.preventDefault();
 
-        setMessage('doRegister()');
-        alert('doRegister()');
+        // Create a JSON object from the HTML form values.
+        let obj =
+        {
+            firstName:registerFirstName.value,
+            lastName:registerLastName.value,
+            login:registerUsername.value,
+            password:registerPassword.value,
+            email:registerEmail.value
+        };
+
+        let jsonObject = JSON.stringify(obj);
+
+        let tmp = buildPath('api/register');
+
+        // Send the JSON object to the API.
+        const response = await fetch(tmp,{method:'POST',body:jsonObject,headers:{'Content-Type': 'application/json'}});
+
+        // Store the returned JSON object.
+        let res = JSON.parse(await response.text());
+
+        // Check if an error is returned.
+        if (res.error !== "")
+        {
+            setMessage("Username is taken.");
+        }
+        else
+        {
+            let user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
+            localStorage.setItem('user_data', JSON.stringify(user));
+
+            setMessage('');
+            window.location.href = '/oceanlogger';
+        }
     };
 
     return(
@@ -38,7 +84,7 @@ function Register()
                 <input type="text" className="registerField" id="registerEmail" placeholder="Email" 
                     ref={(c) => registerEmail = c} /><br />
 
-                <input type="submit" id="registerButton" class="buttons" value = "JUST DO IT!"
+                <input type="submit" id="registerButton" className="buttons" value = "JUST DO IT!"
                 onClick={doRegister} /><br />
 
                 <span id="registerResult">{message}</span>
