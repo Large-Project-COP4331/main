@@ -256,6 +256,61 @@
   justify-content: center;
 }
 
+.usernameErrMsg{
+  color: black;
+  display: none;
+}
+
+.usernameErrMsg.show{
+  display: block;
+}
+
+.passwordErrorMsg{
+  color: black;
+  display: none;
+}
+
+.passwordErrorMsg.show{
+  display: block;
+}
+
+.emailErrMsg{
+  color: black;
+  display: none;
+}
+
+.emailErrMsg.show{
+  display: block;
+}
+
+.valid
+{
+	color: green;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.valid:before
+{
+	position: relative;
+	left: -35px;
+	content: "\2611";
+}
+
+.invalid
+{
+	color: red;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.invalid:before
+{
+	position:relative;
+	left: -35px;
+	content:"\2612";
+}
+
 .buttons{
   border-radius: 10px;
   color: white;
