@@ -227,6 +227,12 @@
   padding: 10px 10px 10px 10px;
 }
 
+.loginDivBottom
+{
+  display: flex;
+  justify-content: center;
+}
+
 #registerDiv{
   display:flex;
   flex-direction: row;
@@ -242,6 +248,12 @@
   margin-left: 33%;
   margin-right: 33%;
   padding: 10px 10px 10px 10px;
+}
+
+.registeDivBottom
+{
+  display: flex;
+  justify-content: center;
 }
 
 .buttons{
