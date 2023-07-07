@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import md5 from './md5';
 
 function Login()
 {
@@ -24,7 +25,7 @@ function Login()
     {
         event.preventDefault();
 
-        var obj = {login:loginName.value,password:loginPassword.value};
+        var obj = {login:loginName.value,password:md5(loginPassword.value)};
         var js = JSON.stringify(obj);
 
         try
