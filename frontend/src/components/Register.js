@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { useUsernameValidation } from '../hooks/useUsernameValidation';
 import { useEmailValidation } from '../hooks/useEmailValidation';
+import md5 from './md5';
 
 function Register()
 {
@@ -107,7 +108,7 @@ function Register()
             firstName:registerFirstName.value,
             lastName:registerLastName.value,
             login:registerUsername.value,
-            password:registerPassword.value,
+            password:md5(registerPassword.value),
             email:registerEmail.value
         };
 
