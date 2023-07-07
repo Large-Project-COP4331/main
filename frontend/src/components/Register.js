@@ -84,8 +84,10 @@ function Register()
                 <input type="text" className="registerField" id="registerEmail" placeholder="Email" 
                     ref={(c) => registerEmail = c} /><br />
 
-                <input type="submit" id="registerButton" className="buttons" value = "JUST DO IT!"
-                onClick={doRegister} /><br />
+                <div className="registeDivBottom">
+                    <input type="submit" id="registerButton" class="buttons" value = "Register"
+                    onClick={doRegister} /><br />
+                </div>
 
                 <span id="registerResult">{message}</span>
             </form>
