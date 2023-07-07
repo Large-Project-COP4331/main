@@ -89,6 +89,18 @@ function Register()
     {
         event.preventDefault();
 
+        // Check for valid form inputs.
+        let str = RegisterCheck
+        (registerFirstName.value, registerLastName.value, registerUsername.value, registerPassword.value, registerEmail.value);
+
+        if (str !== "")
+        {
+            setMessage(str);
+            return;
+        }
+
+        setMessage(str);
+
         // Create a JSON object from the HTML form values.
         let obj =
         {
@@ -101,26 +113,34 @@ function Register()
 
         let jsonObject = JSON.stringify(obj);
 
-        let tmp = buildPath('api/register');
-
-        // Send the JSON object to the API.
-        const response = await fetch(tmp,{method:'POST',body:jsonObject,headers:{'Content-Type': 'application/json'}});
-
-        // Store the returned JSON object.
-        let res = JSON.parse(await response.text());
-
-        // Check if an error is returned.
-        if (res.error !== "")
+        try
         {
-            setMessage("Username is taken.");
+            let tmp = buildPath('api/register');
+
+            // Send the JSON object to the API.
+            const response = await fetch(tmp,{method:'POST',body:jsonObject,headers:{'Content-Type': 'application/json'}});
+
+            // Store the returned JSON object.
+            let res = JSON.parse(await response.text());
+
+            // Check if an error is returned.
+            if (res.error !== "")
+            {
+                setMessage("Username is taken.");
+            }
+            else
+            {
+                let user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
+                localStorage.setItem('user_data', JSON.stringify(user));
+
+                setMessage('');
+                window.location.href = '/oceanlogger';
+            }
         }
-        else
+        catch(e)
         {
-            let user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
-            localStorage.setItem('user_data', JSON.stringify(user));
-
-            setMessage('');
-            window.location.href = '/oceanlogger';
+            console.log(e);
+            return;
         }
     };
 
@@ -222,3 +242,40 @@ function Register()
 };
 
 export default Register;
+
+// Checks for valid form inputs.
+function RegisterCheck(first, last, username, password, email)
+{
+    // First/Last can't be blank.
+    if (first === "")
+    {
+        return "First name cannot be blank.";
+    }
+    else if (last === "")
+    {
+        return "Last name cannot be blank.";
+    }
+
+    // Check the username.
+    let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])[a-zA-Z\d]{8,16}$/;
+    if (regex.test(username) === false)
+    {
+        return "Username is invalid.";
+    }
+    
+    // Check the password.
+    regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/;
+    if (regex.test(password) === false)
+    {
+        return "Password is invalid.";
+    }
+
+    // Check the email.
+    regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+    if (regex.test(email) === false)
+    {
+        return "Email is invalid.";
+    }
+
+    return "";
+}
