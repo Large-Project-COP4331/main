@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { usePasswordValidation } from '../hooks/usePasswordValidation';
+import { useUsernameValidation } from '../hooks/useUsernameValidation';
+import { useEmailValidation } from '../hooks/useEmailValidation';
 
 function Register()
 {
