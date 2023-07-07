@@ -27,7 +27,7 @@ function LoginPage()
   
             <div className="loginRegisterToggle">
               <ToggleSwitch
-                  isOn={showLogin}
+                  isOn={!showLogin}
                   onColor="#339DFF"
                   handleToggle={() => setShowLogin(!showLogin)}
               />
