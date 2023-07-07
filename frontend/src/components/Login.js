@@ -60,9 +60,9 @@ function Login()
       <div id="loginDiv">
         <form onSubmit={doLogin}>
         <span id="inner-title">LOG IN pls</span><br />
-        <input type="text" id="loginName" placeholder="Username" 
+        <input type="text" id="loginName" className="loginField" placeholder="Username" 
             ref={(c) => loginName = c} /><br />
-        <input type="password" id="loginPassword" placeholder="Password" 
+        <input type="password" id="loginPassword" className="loginField" placeholder="Password" 
             ref={(c) => loginPassword = c} /><br />
         <input type="submit" id="loginButton" class="buttons" value = "Do It"
           onClick={doLogin} />
