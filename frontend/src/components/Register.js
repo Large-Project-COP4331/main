@@ -134,8 +134,7 @@ function Register()
                 let user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
-                setMessage('');
-                window.location.href = '/oceanlogger';
+                setMessage('Account created! Please check your email.');
             }
         }
         catch(e)
@@ -258,7 +257,7 @@ function RegisterCheck(first, last, username, password, email)
     }
 
     // Check the username.
-    let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])[a-zA-Z\d]{8,16}$/;
+    let regex = /^[a-zA-Z\d]{8,16}$/;
     if (regex.test(username) === false)
     {
         return "Username is invalid.";
