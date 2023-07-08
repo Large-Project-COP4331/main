@@ -41,6 +41,10 @@ function Login()
             {
                 setMessage('User/Password combination incorrect');
             }
+            else if (res.verification === false)
+            {
+                setMessage("Email is not verified.");
+            }
             else
             {
                 var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
