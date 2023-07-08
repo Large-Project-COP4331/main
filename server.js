@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
+const crypto = require('crypto');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -47,6 +47,7 @@ app.post('/api/login', async (req, res, next) =>
   let fn = '';
   let ln = '';
   let em = '';
+  let vr = '';
 
   if( results.length > 0 )
   {
@@ -54,9 +55,10 @@ app.post('/api/login', async (req, res, next) =>
     fn = results[0].firstName;
     ln = results[0].lastName;
     em = results[0].email;
+    vr = results[0].verification;
   }
   
-  let ret = { id:id, firstName:fn, lastName:ln, email:em, error:''};
+  let ret = { id:id, firstName:fn, lastName:ln, email:em, verification:vr, error:''};
   res.status(200).json(ret);
 });
 
