@@ -76,6 +76,9 @@ app.post('/api/register', async (req, res, next) =>
     return res.status(200).json(ret);
   }
 
+  // Create a unique hash value for verification.
+  let val = crypto.randomBytes(32).toString('hex');
+
   // Add the info to the database.
   let result = await database.insertOne
   (
@@ -85,9 +88,44 @@ app.post('/api/register', async (req, res, next) =>
       login:login,
       password:password,
       email:email,
-      verification:false
+      verification:false,
+      hash:val
     }
   );
+
+  // Send an email to verify the account.
+  const sgMail = require('@sendgrid/mail');
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+  let str = "";
+
+  if (process.env.NODE_ENV === 'production')
+  {
+    str = "https://oceanlogger-046c28329f84.herokuapp.com/verify/" + val;
+  }
+  else
+  {
+    str = "http://localhost:5000/verify/" + val;
+  }
+
+  const msg =
+  {
+    to: email,
+    from: "Oceanloggers4331@gmail.com",
+    subject: 'OceanLogger Verification',
+    html: `<p>Please verify: </p><a href="${str}">${str}</a>`
+  };
+
+  // Send the email and check for a message.
+  sgMail.send(msg)
+  .then(() =>
+  {
+    console.log('Email sent.');
+  })
+  .catch((error) =>
+  {
+    console.error(error);
+  });
 
   let id = result.insertedId;
 
