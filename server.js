@@ -135,6 +135,37 @@ app.post('/api/register', async (req, res, next) =>
   res.status(200).json(ret);
 });
 
+// Verification API - checks for valid hash.
+app.get('/verify/:token', async (req, res, next) =>
+{
+  // Get the token from the URL.
+  const token = req.params.token;
+
+  const database = client.db("OceanLogger").collection("Users");
+
+  // Update the verification if the hash value exists.
+  await database.updateOne
+  ( {hash:token},
+    {$set: {verification:true}}
+  );
+  
+  // Remove the hash value.
+  await database.updateOne
+  ( {hash:token},
+    {$unset: {hash:""}}
+  );
+
+  // Redirect to the login page.
+  if (process.env.NODE_ENV === 'production')
+  {
+    res.redirect("https://oceanlogger-046c28329f84.herokuapp.com/");
+  }
+  else
+  {
+    res.redirect("http://localhost:3000/");
+  }
+});
+
 
 app.use((req, res, next) => 
 {
