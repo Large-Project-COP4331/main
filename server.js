@@ -141,6 +141,8 @@ app.get('/verify/:token', async (req, res, next) =>
   // Get the token from the URL.
   const token = req.params.token;
 
+  console.log("Found " + token);
+
   const database = client.db("OceanLogger").collection("Users");
 
   // Update the verification if the hash value exists.
