@@ -78,7 +78,8 @@ app.post('/api/register', async (req, res, next) =>
       password:password,
       email:email,
       verification:false,
-      hash:val
+      hash:val,
+      "createdAt":new Date()
     }
   );
 
@@ -105,7 +106,7 @@ app.post('/api/register', async (req, res, next) =>
     html: `<p>Please verify: </p><a href="${str}">${str}</a>`
   };
 
-  // Send the email and check for a message.
+  // Send the message and check for an error.
   sgMail.send(msg)
   .then(() =>
   {
@@ -130,8 +131,6 @@ app.get('/verify/:token', async (req, res, next) =>
   // Get the token from the URL.
   const token = req.params.token;
 
-  console.log("Found " + token);
-
   const database = client.db("OceanLogger").collection("Users");
 
   // Update the verification if the hash value exists.
@@ -140,10 +139,10 @@ app.get('/verify/:token', async (req, res, next) =>
     {$set: {verification:true}}
   );
   
-  // Remove the hash value.
+  // Remove the hash value and expiration date.
   await database.updateOne
   ( {hash:token},
-    {$unset: {hash:""}}
+    {$unset: {hash:"", "createdAt":""}}
   );
 
   // Redirect to the login page.
