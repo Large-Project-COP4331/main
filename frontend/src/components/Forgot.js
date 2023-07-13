@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 function Forgot()
 {
     let forgotEmail;
+    const route = (process.env.NODE_ENV === 'production' ?
+    "https://oceanlogger-046c28329f84.herokuapp.com/api/sendreset" : "http://localhost:5000/api/sendreset");
 
     const [message,setMessage] = useState('');
 
@@ -11,8 +13,29 @@ function Forgot()
     {
         event.preventDefault();
 
-        setMessage('Hello There General KENOBI!');
-        alert('doForgot()');
+        let jsonObject = JSON.stringify({email:forgotEmail.value});
+
+        try
+        {
+            const response = await fetch(route,{method:'POST',body:jsonObject,headers:{'Content-Type': 'application/json'}});
+            let res = JSON.parse(await response.text());
+
+            if (res.error !== "")
+            {
+                setMessage(res.error);
+                return;
+            }
+            else
+            {
+                setMessage("A password reset email has been sent. Check your email!");
+                return;
+            }
+        }
+        catch(e)
+        {
+            console.log(e.toString());
+            return;
+        }
     };
 
     return(
