@@ -28,7 +28,7 @@ app.post('/api/login', async (req, res, next) =>
 {	
   const { login, password } = req.body;
   const database = client.db('OceanLogger').collection('Users');
-  const document = await database.findOne({login:login});
+  const document = await database.findOne({login:login.toLowerCase()});
 
   // Check for valid login/password/verification.
   if (document == null || await bcrypt.compare(password, document.password) == false)
@@ -58,14 +58,16 @@ app.post('/api/login', async (req, res, next) =>
 app.post('/api/register', async (req, res, next) => 
 {
   const {firstName, lastName, login, password, email} = req.body;
+  const lowerLogin = login.toLowerCase();
+  const lowerEmail = email.toLowerCase();
   const database = client.db("OceanLogger").collection("Users");
 
   // Check if the username already exists.
-  if (await database.findOne({login:login}) != null)
+  if (await database.findOne({login:lowerLogin}) != null)
   {
     return res.status(200).json({error:"Username already exists."});
   }
-  else if (await database.findOne({email:email}) != null)
+  else if (await database.findOne({email:lowerEmail}) != null)
   {
     return res.status(200).json({error:"Email is taken."});
   }
@@ -80,9 +82,9 @@ app.post('/api/register', async (req, res, next) =>
     {
       firstName:firstName,
       lastName:lastName,
-      login:login,
+      login:lowerLogin,
       password:hashedPassword,
-      email:email,
+      email:lowerEmail,
       verification:false,
       hash:val,
       resetToken:"",
