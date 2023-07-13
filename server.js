@@ -63,7 +63,11 @@ app.post('/api/register', async (req, res, next) =>
   // Check if the username already exists.
   if (await database.findOne({login:login}) != null)
   {
-    return res.status(200).json({error:"Username Already Exists."});
+    return res.status(200).json({error:"Username already exists."});
+  }
+  else if (await database.findOne({email:email}) != null)
+  {
+    return res.status(200).json({error:"Email is taken."});
   }
 
   // Create a unique hash value for verification.
