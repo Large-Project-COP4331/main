@@ -2,6 +2,12 @@ import React, { useState } from 'react';
 import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { useUsernameValidation } from '../hooks/useUsernameValidation';
 import { useEmailValidation } from '../hooks/useEmailValidation';
+import { useNumberValidation} from '../hooks/useNumberValidation';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye} from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+const eye = <FontAwesomeIcon icon={faEye}/>;
+const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>
 import md5 from './md5';
 
 function Register()
@@ -25,6 +31,7 @@ function Register()
     let registerUsername;
     let registerPassword;
     let registerEmail;
+    let registerNumber;
 
     const [message,setMessage] = useState('');
 
@@ -40,9 +47,14 @@ function Register()
         registerEmail: "",
     });
 
+    const [number, setNumber] = useState({
+        registerNumber: "",
+    });
+
     const [showPasswordErr, setShowPasswordErr] = useState(true);
     const [showUsernameErr, setShowUsernameErr] = useState(true);
     const [showEmailErr, setShowEmailErr] = useState(true);
+    const [showNumberErr, setShowNumberErr] = useState(true);
 
     const [
         userValidLength,
@@ -69,11 +81,16 @@ function Register()
         registerEmail: email.registerEmail
     });
 
+    const [
+        validNumber
+    ] = useNumberValidation({
+        registerNumber: number.registerNumber
+    });
+
     const setRegisterUsername = (event) => 
     {
         setUsername({...username, registerUsername: event.target.value})
     }
-
 
     const setRegisterPassword = (event) => 
     {
@@ -83,6 +100,16 @@ function Register()
     const setRegisterEmail = (event) => 
     {
         setEmail({...email, registerEmail: event.target.value})
+    }
+
+    const setRegisterNumber = (event) => 
+    {
+        setNumber({...number, registerNumber: event.target.value})
+    }
+
+    const togglePasswordVisibility =() =>
+    {
+        setShowPassword(showPassword ? false : true);
     }
 
     // Function to call the register API.
@@ -146,44 +173,66 @@ function Register()
 
     return(
         <div id="registerDiv">
-            <form onSubmit={doRegister}>
-                <span id="inner-title">REGISTER</span><br />
+            <form className="registerForm" onSubmit={doRegister}>
+                <div className="registerInputs">
+                    <label htmlFor="registerEmail" style={{marginLeft: '10px'}}>
+                        Email:
+                    </label>
+                    <input type="text" 
+                        className="registerField" 
+                        id="registerEmail" 
+                        placeholder="email address" 
+                        ref={(c) => registerEmail = c} 
+                        onChange={setRegisterEmail} 
+                        onFocus={()=>setShowEmailErr(false)} 
+                        onBlur={()=>setShowEmailErr(true)}
+                    />
 
-                <input type="text" className="registerField" id="registerFirstName" placeholder="First Name" 
-                    ref={(c) => registerFirstName = c} /><br />
+                    <label htmlFor="registerNumber" style={{marginLeft: '10px'}}>
+                        Contact Number:
+                    </label>
+                    <input type="text" 
+                        className="registerField" 
+                        id="registerNumber" 
+                        placeholder="contact number"
+                        ref={(c) => registerNumber = c} 
+                        onChange={setRegisterNumber} 
+                        onFocus={()=>setShowNumberErr(false)} 
+                        onBlur={()=>setShowNumberErr(true)}
+                    />
 
-                <input type="text" className="registerField" id="registerLastName" placeholder="Last Name" 
-                    ref={(c) => registerLastName = c} /><br />
+                    <label htmlFor="registerUsername" style={{marginLeft: '10px'}}>
+                        Username:
+                    </label>
+                    <input type="text" 
+                        className="registerField" 
+                        id="registerUsername" 
+                        placeholder="Username" 
+                        ref={(c) => registerUsername = c} 
+                        onChange={setRegisterUsername} 
+                        onFocus={()=>setShowUsernameErr(false)} 
+                        onBlur={()=>setShowUsernameErr(true)}
+                    />
 
-                <input type="text" 
-                    className="registerField" 
-                    id="registerUsername" 
-                    placeholder="Username" 
-                    ref={(c) => registerUsername = c} 
-                    onChange={setRegisterUsername} 
-                    onFocus={()=>setShowUsernameErr(false)} 
-                    onBlur={()=>setShowUsernameErr(true)}
-                /><br />
-
-                <input type="password" 
-                    className="registerField" 
-                    id="registerPassword" 
-                    placeholder="Password" 
-                    ref={(c) => registerPassword = c} 
-                    onChange={setRegisterPassword} 
-                    onFocus={()=>setShowPasswordErr(false)} 
-                    onBlur={()=>setShowPasswordErr(true)}
-                /><br />
-
-                <input type="text" 
-                    className="registerField" 
-                    id="registerEmail" 
-                    placeholder="Email" 
-                    ref={(c) => registerEmail = c} 
-                    onChange={setRegisterEmail} 
-                    onFocus={()=>setShowEmailErr(false)} 
-                    onBlur={()=>setShowEmailErr(true)}
-                /><br />
+                    <label htmlFor="registerPassword" style={{marginLeft: '10px'}}>
+                        Password:
+                        </label>
+                    <div className="passwordInput">
+                        <input type={showPassword ? "text":"password"} 
+                            className="registerField" 
+                            id="registerPassword" 
+                            placeholder="Password" 
+                            ref={(c) => registerPassword = c} 
+                            onChange={setRegisterPassword} 
+                            onFocus={()=>setShowPasswordErr(false)} 
+                            onBlur={()=>setShowPasswordErr(true)}
+                        />
+                        <i className="registerPassVisibility" onClick={togglePasswordVisibility}>
+                            {showPassword ? eyeSlash : eye}
+                        </i>
+                        
+                    </div>
+                </div>
 
                 <div className="registeDivBottom">
                     <input type="submit" id="registerButton" class="buttons" value = "Register"
@@ -236,6 +285,13 @@ function Register()
                             </p>
                         </ul>
                 </div>
+                <div className={showNumberErr? "numberErrMsg" : "show"}  >
+                        <ul>
+                            <p id="numbervalid" className={validNumber ? "valid" : "invalid"}>
+                                Needs to be: <b>###-###-####</b>
+                            </p>
+                        </ul>
+                </div>
             </form>
         </div>
     );
@@ -247,14 +303,14 @@ export default Register;
 function RegisterCheck(first, last, username, password, email)
 {
     // First/Last can't be blank.
-    if (first === "")
-    {
-        return "First name cannot be blank.";
-    }
-    else if (last === "")
-    {
-        return "Last name cannot be blank.";
-    }
+    //if (first === "")
+    //{
+        //return "First name cannot be blank.";
+    //}
+    //else if (last === "")
+    //{
+        //return "Last name cannot be blank.";
+    //}
 
     // Check the username.
     let regex = /^[a-zA-Z\d]{8,16}$/;

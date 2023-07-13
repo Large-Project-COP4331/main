@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye} from "@fortawesome/free-solid-svg-icons";
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+const eye = <FontAwesomeIcon icon={faEye}/>;
+const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>
 import md5 from './md5';
 
 function Login()
@@ -20,6 +26,12 @@ function Login()
     var loginPassword;
 
     const [message,setMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility =() =>
+    {
+        setShowPassword(showPassword ? false : true);
+    }
 
     const doLogin = async event => 
     {
@@ -62,20 +74,42 @@ function Login()
     };
 
     return(
-      <div id="loginDiv">
-        <form onSubmit={doLogin}>
-            <span id="inner-title">LOG IN pls</span><br />
-            <input type="text" id="loginName" className="loginField" placeholder="Username" 
-                ref={(c) => loginName = c} /><br />
-            <input type="password" id="loginPassword" className="loginField" placeholder="Password" 
-                ref={(c) => loginPassword = c} /><br />
-            <div className="loginDivBottom">
+        <div id="loginDiv">
+            <form className="loginForm" onSubmit={doLogin}>
+                <div className="loginInputs">
+                    <label htmlFor="loginName" style={{marginLeft: '10px'}}>
+                        Enter your username:
+                    </label>
+                    <input type="text" id="loginName" className="loginField" placeholder="Username" 
+                        ref={(c) => loginName = c} />
+
+                    <label htmlFor="loginPassword" style={{marginLeft: '10px'}}>
+                        Enter your password:
+                    </label>
+                    <div className="passwordInput">
+                        <input type={showPassword ? "text":"password"} 
+                            id="loginPassword" 
+                            className="loginField" 
+                            placeholder="Password" 
+                            ref={(c) => loginPassword = c} />
+                        <i className="loginPassVisibility" onClick={togglePasswordVisibility}>
+                            {showPassword ? eyeSlash : eye}
+                        </i> 
+                    </div>
+                </div>
+
+                <div className="forgotPassword">
+                    <Link to="/forgotpage">Forgot Password</Link>
+                </div>
+                
+                <div className="loginDivBottom">
                     <input type="submit" id="loginButton" class="buttons" value = "Login"
                         onClick={doLogin} /><br />
-            </div>
-        </form>
-        <span id="loginResult">{message}</span>
-     </div>
+                </div>
+                
+                <span id="loginResult">{message}</span>
+            </form>
+        </div>
     );
 };
 

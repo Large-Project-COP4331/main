@@ -37,55 +37,146 @@
   }
 }
 
-#title{
+#title
+{
   background-color: white;
   border-radius: 10px;
-	text-align: center;
+  text-align: center;
   padding: 10px 10px 10px 10px;
   width: 33%;
   margin-left: 33%;
   margin-right: 33%;
 }
 
-#loginName
+.loginContent, .forgotContent,
+.registerContent
 {
-  border-radius: 10px;
-  border-style: solid;
-  border-width: thin;
-  margin: 10px 10px 10px 10px;
+  background-color: white;
 }
 
-#loginPassword
+.loginTop, .forgotTop,
+.registerTop
 {
-  border-radius: 10px;
-  border-style: solid;
-  border-width: thin;
-  margin: 10px 10px 10px 10px;
+  display: flex;
+  flex-direction: row;
+  background-color: #0089ED;
 }
 
-#registerName
+.loginTopLeft, .forgotTopLeft,
+.registerTopLeft
 {
-  border-radius: 10px;
-  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 37.5%;
+}
+
+.loginTopMid, .forgotTopMid,
+.registerTopMid
+{
+  width: 25%;
+  height: 100%;
+}
+
+.loginTopRight, .forgotTopRight,
+.registerTopRight
+{
+  width: 37.5%;
+}
+
+#loginTopMessage, #forgotTopMessage,
+#registerTopMessage
+{
+  color: white;
+  /*background-color: pink;*/
+  margin-bottom: 100px;
+  padding-left: 50px;
+}
+
+.loginGoHome, .forgotGoHome,
+.registerGoHome
+{
+  height: 50px;
+  margin-left: 10px;
+  /*background-color: orange;*/
+}
+
+.loginBoxTop, .forgotBoxTop,
+.registerBoxTop
+{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-style: solid solid none solid;
   border-width: thin;
-  margin: 10px 10px 10px 10px;
+  border-color: gray;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+  height: 100%;
+  margin-top: 200px;
+  padding: 10px 10px 10px 10px;
+}
+
+.loginBoxTopContent, .forgotBoxTopContent,
+.registerBoxTopContent
+{
+  display: flex;
+  flex-direction: row;
+}
+
+.loginBoxTopLeft, .forgotBoxTopLeft,
+.registerBoxTopLeft
+{
+  margin-top: 10px;
+  margin-left: 10px;
+  width: 75%;
+}
+
+.loginBoxTopRight, .forgotBoxTopRight,
+.registerBoxTopRight
+{
+  margin-top: 10px;
+  width: 25%;
+}
+
+.loginBottom, .forgotBottom,
+.registerBottom
+{
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  width: 100%;
+}
+
+.loginBottomLeft, .forgotBottomLeft,
+.registerBottomLeft
+{
+  width: 37.5%;
+}
+
+.loginBottomMid, .forgotBottomMid,
+.registerBottomMid
+{
+  width: 25%;
+}
+
+.loginBottomRight, .forgotBottomRight,
+.registerBottomRight
+{
+  width: 37.5%;
+}
+.messageLogo
+{
+  display: flex;
+  flex-direction: row;
 }
 
 #registerPassword
 {
-  border-radius: 10px;
-  border-style: solid;
-  border-width: thin;
-  margin: 10px 10px 10px 10px;
-}
-
-.loginField
-{
-  border-radius: 10px;
-  border-style: solid;
-  border-width: thin;
-  margin: 10px 10px 10px 10px;
-  padding: 10px 10px 10px 10px;
+  width: 100%;
 }
 
 .registerField
@@ -99,7 +190,7 @@
 
 #loggedInDiv{
   border-radius: 10px;
-  background-color: green;
+  background-color: #4589df;
   color: white;
   display: flex;
   flex-direction: row;
@@ -110,98 +201,6 @@
   margin-left: 33%;
   margin-right: 33%;
   margin-bottom: 10px;
-}
-
-.loginRegisterBox{
-  background-color: white;
-  border-radius: 10px;
-}
-
-.loginRegisterToggle{
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  border-style: solid solid none solid;
-  border-width: thin;
-  border-color: gray;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  width: 33%;
-  margin-left: 33%;
-  margin-right: 33%;
-  padding: 10px 10px 10px 10px;
-}
-
-.react-switch-checkbox {
-  height: 0;
-  width: 0;
-  visibility: hidden;
-}
-
-.react-switch-label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  width: 175px;
-  height: 40px;
-  background: #339DFF;
-  border-radius: 10px;
-  position: relative;
-  transition: background-color .2s;
-  content:'Hello';
-}
-
-.react-switch-label .react-switch-button {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 81px;
-  height: 35px;
-  border-radius: 10px;
-  transition: 0.2s;
-  background: #0000FF;
-  box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
-}
-
-.react-switch-checkbox:checked + .react-switch-label .react-switch-button {
-  left: calc(100% - 2px);
-  transform: translateX(-100%);
-}
-
-.react-switch-label:active .react-switch-button {
-  width: 60px;
-}
-
-.word {
-  display: block;
-  width: 200%;
- 
-}
-
-.word:before,
-.word:after {
-  float: left;
-  width: 50%;
-  height: 36px;
-  padding: 0;
-  line-height: 36px;
-  font-weight: bold;
-  box-sizing: border-box;
-}
-.word:before {
-  content: "LOGIN";
-  padding-left: 10px;
-  color: #fff;
-}
-.word:after {
-  content: "REGISTER";
-  padding-right: 10px;
-  color: #fff;
-  text-align: right;
 }
 
 #inner-title
@@ -219,18 +218,114 @@
   border-style: none solid solid solid;
   border-width: thin;
   border-color: gray;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  width: 33%;
-  margin-left: 33%;
-  margin-right: 33%;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 100%;
   padding: 10px 10px 10px 10px;
+}
+
+.loginForm
+{
+  width: 100%;
+}
+
+.loginField
+{
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+#loginButton
+{
+  width: 100%;
+}
+
+.loginInputs
+{
+  display: flex;
+  flex-direction: column;
+}
+
+#loginPassword
+{
+  width: 100%;
+}
+
+.loginPassVisibility
+{
+  position: absolute;
+  top: 28%;
+  right: 5%;
+}
+
+.loginPassVisibility:hover
+{
+  color: gray;
+  cursor: pointer;
 }
 
 .loginDivBottom
 {
   display: flex;
   justify-content: center;
+}
+
+#forgotDiv
+{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-style: none solid solid solid;
+  border-width: thin;
+  border-color: gray;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+}
+
+.forgotForm
+{
+  width: 100%;
+}
+
+.forgotInputs
+{
+  display: flex;
+  flex-direction: row;
+}
+
+.forgotPassword
+{
+  text-align: right;
+  justify-content: right;
+  margin-right: 10px;
+  font-size: 10px;
+  color: black;
+}
+
+.forgotField
+{
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+#forgotButton
+{
+  width: 100%;
+}
+
+#forgotEmail
+{
+  width: 100%;
 }
 
 #registerDiv{
@@ -250,51 +345,131 @@
   padding: 10px 10px 10px 10px;
 }
 
+.registerForm
+{
+  width: 100%;
+}
+
+.registerField
+{
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+#registerButton
+{
+  width: 100%;
+}
+
+.registerInputs
+{
+  display: flex;
+  flex-direction: column;
+}
+
+.passwordInput
+{
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  position: relative
+}
+
+#registerPassword
+{
+  width: 100%;
+}
+
+.registerPassVisibility
+{
+  position: absolute;
+  top: 31%;
+  right: 5%;
+}
+
+.registerPassVisibility:hover{
+  color: gray;
+  cursor: pointer;
+}
+
+/*originally used when registering, not needed right now?*/
+.firstAndLastName
+{
+  display: flex;
+  flex-direction: column;
+}
+
 .registeDivBottom
 {
   display: flex;
   justify-content: center;
 }
 
-.usernameErrMsg{
+.errMessages
+{
+  display: flex;
+  justify-content: center;
+}
+
+.usernameErrMsg
+{
   color: black;
   display: none;
 }
 
-.usernameErrMsg.show{
+.usernameErrMsg.show
+{
   display: block;
 }
 
-.passwordErrorMsg{
+.passwordErrorMsg
+{
   color: black;
   display: none;
 }
 
-.passwordErrorMsg.show{
+.passwordErrorMsg.show
+{
   display: block;
 }
 
-.emailErrMsg{
+.emailErrMsg
+{
   color: black;
   display: none;
 }
 
-.emailErrMsg.show{
+.emailErrMsg.show
+{
+  display: block;
+}
+
+.numberErrMsg
+{
+  color: black;
+  display: none;
+}
+
+.numberErrMsg.show
+{
   display: block;
 }
 
 .valid
 {
-	color: green;
+  color: green;
   margin-top: 0;
   margin-bottom: 0;
 }
 
 .valid:before
 {
-	position: relative;
-	left: -35px;
-	content: "\2611";
+  position: relative;
+  left: -35px;
+  content: "\2611";
 }
 
 .invalid
@@ -306,59 +481,252 @@
 
 .invalid:before
 {
-	position:relative;
-	left: -35px;
-	content:"\2612";
+  position:relative;
+  left: -35px;
+  content:"\2612";
 }
 
-.buttons{
+.buttons
+{
   border-radius: 10px;
   color: white;
-  background: #339DFF;
+  background: #0089ED;
   border: 0;
   margin: 10px 10px 10px 10px;
   padding: 10px 10px 10px 10px;
 }
 
-.buttons:hover{
-  background: #0000FF;
+.buttons:hover
+{
+  background: #006dbd;
 }
 
-#cardUIDiv{
-  display:flex;
+#logoutButton
+{
+  color: black;
+  background-color: white;
+}
+
+#logoutButton:hover
+{
+  background-color: #3766b2;
+  color: white;
+  font-weight: bold;
+}
+
+.left 
+{
+  background-color: white;
+  display: inline-block;
+  width: 17%;
+  font-size: 18px;
+  border-radius: 10px;
+  padding: 18px 17px;
+  color: #1d19e7;
+}
+
+.mid 
+{
+  background-color: white;
+  display: inline-block;
+}
+
+.navbar
+{
+  overflow: hidden;
+}
+
+.navLinks
+{
+  display: inline-block;
+  color: #4C4E52;
+  text-align: center;
+  padding: 10px 10px 10px 10px;
+  text-decoration: none;
+  font-size: 15px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+/* Change color on hover */
+.navBar a:hover:not(.active) 
+{
+  background-color: #339DFF;
+  color: #f2f2f2;
+  border-radius: 10px;
+  font-weight:bolder;
+}
+
+/* Visual to let you know your on insert pageg*/
+.navBar a.active
+{
+  background-color:#339DFF;
+  color: #f2f2f2;
+  border-radius: 10px;
+}
+
+.right 
+{
+  float: right;
+  background-color: white;
+  border-radius: 10px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.loggedOutContent
+{
+  display: flex;
+  flex-direction: row;
+}
+
+.leftShark
+{
+  display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  width: 33%;
-  margin-left: 33%;
-  margin-right: 33%;
+  align-items: center;
+}
+
+.ExploreTheOceanWithScubaLogger
+{
+  width: 75%;
+}
+
+/*can use same id?*/
+/*span id*/
+#blackText
+{
+  color: black;
+  font-size: 74px;
+  font-family: 'Inter';
+  font-weight: 700;
+  word-wrap: 'break-word';
+}
+
+/*span id*/
+#blueText
+{
+  color: #4589df;
+  font-size: 74px;
+  font-family: 'Inter';
+  font-weight: 700;
+  word-wrap: 'break-word';
+}
+
+.scubbaDescription
+{
+  width: 75%;
+  color: rgb(0, 0, 0, 0.51);
+  font-size: 24px;
+  font-family: 'Inter';
+  font-weight: 600;
+  word-wrap: 'break-word';
+}
+
+.rightShark
+{
+  display: flex;
+  flex-direction: center;
+  align-items: center;
+}
+
+.Image2
+{
+  width: 100%;
+  border-radius: 20px;
+}
+
+.toolsProvided
+{
+  width: 100%;
+  background-color: rgb(217, 217, 217, 0.5);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.bigText
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 50%;
+  margin-top: 20px;
+}
+
+.scubbaTools
+{
+  display: flex;
+  flex-direction: row;
+}
+
+
+.tool1
+{
+  display: flex;
+  width: 150px;
+  height: 150px;
+  border-radius: 9999px;
+  background-color: #0089ED;
+  margin: 40px 40px 40px 40px;
+
+}
+
+.tool2
+{
+  display: flex;
+  width: 150px;
+  height: 150px;
+  border-radius: 9999px;
+  background-color: #0089ED;
+  margin: 40px 40px 40px 40px;
+}
+
+.tool3
+{
+  display: flex;
+  width: 150px;
+  height: 150px;
+  border-radius: 9999px;
+  background-color: #0089ED;
+  margin: 40px 40px 40px 40px;
+}
+
+.loggedOutBottom
+{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 500px;
+  height: 60px;
+  border-radius: 20px;
+}
+
+.footer
+{
+  height: 100px;
+  background-color: #D9d9d9;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
   padding: 10px 10px 10px 10px;
-  border-radius: 10px;
-  background-color: red;
 }
 
-#searchText{
-  border-radius: 10px;
+.footerContent
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-#cardText{
-  border-radius: 10px;
-}
-
-#cardSearchResult{
-  background-color: white;
-  padding: 10px 10px 10px 10px;
-  border-radius: 10px;
-}
-
-#cardList{
-  background-color: white;
-  padding: 10px 10px 10px 10px;
-  border-radius: 10px;
-}
-
-#cardAddResult{
-  background-color: white;
-  padding: 10px 10px 10px 10px;
-  border-radius: 10px;
+.footerLogo
+{
+  display: flex;
+  flex-direction: row;
+  width: 100px;
+  height: 35px;
 }

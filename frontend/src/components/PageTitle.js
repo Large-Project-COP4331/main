@@ -3,7 +3,24 @@ import React from 'react';
 function PageTitle()
 {
     return(
-        <h1 id="title">Group 3 Ocean Logger</h1>
+        <div className="Subbalogger" style={{width: 225, height: 49}}>
+            <span style={{color: 'black', 
+                         fontSize: 32, 
+                         fontFamily: 'Inter', 
+                         fontWeight: '700', 
+                         wordWrap: 'break-word'}}
+            >
+                Scubba
+            </span>
+            <span style={{color: '#4589DF', 
+                         fontSize: 32, 
+                         fontFamily: 'Inter', 
+                         fontWeight: '700', 
+                         wordWrap: 'break-word'}}
+            >
+                Logger 
+            </span>
+        </div>
     );
 };
 
