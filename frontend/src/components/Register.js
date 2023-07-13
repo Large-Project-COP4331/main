@@ -6,9 +6,10 @@ import { useNumberValidation} from '../hooks/useNumberValidation';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import md5 from './md5';
+
 const eye = <FontAwesomeIcon icon={faEye}/>;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>
-import md5 from './md5';
 
 function Register()
 {
@@ -38,6 +39,8 @@ function Register()
     const [password, setPassword] = useState({
         registerPassword: "",
     });
+
+    const [showPassword, setShowPassword] = useState(false);
 
     const [username, setUsername] = useState({
         registerUsername: "",
