@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import md5 from './md5';
+
 const eye = <FontAwesomeIcon icon={faEye}/>;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>
-import md5 from './md5';
 
 function Login()
 {
