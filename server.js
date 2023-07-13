@@ -2,6 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
+
+const saltRounds = 10;
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -19,54 +22,53 @@ const MongoClient = require('mongodb').MongoClient;
 const client = new MongoClient(url);
 client.connect();
 
-//login api
+
+// Login API.
 app.post('/api/login', async (req, res, next) => 
-{
-  // incoming: login, password
-  // outgoing: id, firstName, lastName, error
-	
- let error = '';
+{	
+  const { login, password } = req.body;
+  const database = client.db('OceanLogger').collection('Users');
+  const document = await database.findOne({login:login});
 
- const { login, password } = req.body;
- console.log({login:login,password:password});
- 
-
-  const results = await client.db('OceanLogger').collection('Users').find({login:login,password:password}).toArray();
-  let id = '';
-  let fn = '';
-  let ln = '';
-  let em = '';
-  let vr = '';
-
-  if( results.length > 0 )
+  // Check for valid login/password/verification.
+  if (document == null || await bcrypt.compare(password, document.password) == false)
   {
-    id = results[0].UserID;
-    fn = results[0].firstName;
-    ln = results[0].lastName;
-    em = results[0].email;
-    vr = results[0].verification;
+    return res.status(200).json({error:"Invalid Username/Password."});
   }
+  else if (document.verification == false)
+  {
+    return res.status(200).json({error:"Email is not verified."});
+  }
+
+  // Returns this information.
+  let ret =
+  {
+    id:document._id,
+    firstName:document.firstName,
+    lastName:document.lastName,
+    email:document.email,
+    error:""
+  };
   
-  let ret = { id:id, firstName:fn, lastName:ln, email:em, verification:vr, error:''};
   res.status(200).json(ret);
 });
+
 
 // Register API.
 app.post('/api/register', async (req, res, next) => 
 {
   const {firstName, lastName, login, password, email} = req.body;
-
   const database = client.db("OceanLogger").collection("Users");
 
   // Check if the username already exists.
   if (await database.findOne({login:login}) != null)
   {
-    let ret = {id:"",firstName:"", lastName:"", email:"", error:"Username Already Exists."};
-    return res.status(200).json(ret);
+    return res.status(200).json({error:"Username Already Exists."});
   }
 
   // Create a unique hash value for verification.
   let val = crypto.randomBytes(32).toString('hex');
+  let hashedPassword = await bcrypt.hash(password, saltRounds);
 
   // Add the info to the database.
   let result = await database.insertOne
@@ -75,28 +77,21 @@ app.post('/api/register', async (req, res, next) =>
       firstName:firstName,
       lastName:lastName,
       login:login,
-      password:password,
+      password:hashedPassword,
       email:email,
       verification:false,
       hash:val,
+      resetToken:"",
       "createdAt":new Date()
     }
   );
-
+  
   // Send an email to verify the account.
   const sgMail = require('@sendgrid/mail');
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-  let str = "";
-
-  if (process.env.NODE_ENV === 'production')
-  {
-    str = "https://oceanlogger-046c28329f84.herokuapp.com/verify/" + val;
-  }
-  else
-  {
-    str = "http://localhost:5000/verify/" + val;
-  }
+  let str = (process.env.NODE_ENV === 'production' ?
+  `https://oceanlogger-046c28329f84.herokuapp.com/verify/${val}` : `http://localhost:5000/verify/${val}`);
 
   const msg =
   {
@@ -106,31 +101,94 @@ app.post('/api/register', async (req, res, next) =>
     html: `<p>Please verify: </p><a href="${str}">${str}</a>`
   };
 
-  // Send the message and check for an error.
   sgMail.send(msg)
-  .then(() =>
-  {
-    console.log('Email sent.');
-  })
-  .catch((error) =>
-  {
-    console.error(error);
-  });
+  .then(() => { console.log('Email sent.'); })
+  .catch((error) => { console.error(error); });
 
-  let id = result.insertedId;
-
-  // Returns this information. Can change this.
-  let ret = {id:id, firstName:firstName, lastName:lastName, email:email, error:""};
-
+  // Returns this information.
+  let ret = {firstName:firstName, lastName:lastName, email:email, error:""};
   res.status(200).json(ret);
 });
+
+
+// Send Password Reset API.
+app.post('/api/sendreset', async (req, res, next) => 
+{
+  const {email} = req.body;
+  const database = client.db("OceanLogger").collection("Users");
+  const document = await database.findOne({email:email});
+
+  if (document == null)
+  {
+    return res.status(200).json({error:"No account associated with email provided."});
+  }
+  else if (document.verification == false)
+  {
+    return res.status(200).json({error:"Please verify the email before attempting a password reset."});
+  }
+
+  // Generate and store a reset token.
+  let token = crypto.randomBytes(32).toString('hex');
+
+  await database.findOneAndUpdate
+  (
+    {email:email},
+    {$set: {resetToken:token}}
+  );
+
+  // Send an email with a link to reset.
+  const sgMail = require('@sendgrid/mail');
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+  let str = (process.env.NODE_ENV === 'production' ?
+  `https://oceanlogger-046c28329f84.herokuapp.com/reset?token=${token}` : `http://localhost:3000/reset?token=${token}`);
+
+  const msg =
+  {
+    to: email,
+    from: "Oceanloggers4331@gmail.com",
+    subject: 'OceanLogger Reset Password',
+    html: `<p>Reset Link: </p><a href="${str}">${str}</a>`
+  };
+
+  sgMail.send(msg)
+  .then(() => { console.log('Password Reset Sent.'); })
+  .catch((error) => { console.error(error); });
+
+  res.status(200).json({error:""});
+});
+
+
+// Update Password API.
+app.post('/api/updatepassword', async (req,res,next) =>
+{
+  const {token, password} = req.body;
+  const database = client.db("OceanLogger").collection("Users");
+
+  // Check for a valid reset token.
+  if (token === null || await database.findOne({resetToken:token}) === null)
+  {
+    return res.status(200).json({error:"Invalid Reset Token."});
+  }
+
+  let hashedPassword = await bcrypt.hash(password, saltRounds);
+
+  // Update the password for that token.
+  await database.findOneAndUpdate
+  (
+    {resetToken:token},
+    {$set: {password:hashedPassword, resetToken:""}},
+  );
+
+  return res.status(200).json({error:""});
+});
+
 
 // Verification API - checks for valid hash.
 app.get('/verify/:token', async (req, res, next) =>
 {
   // Get the token from the URL.
   const token = req.params.token;
-
   const database = client.db("OceanLogger").collection("Users");
 
   // Update the verification if the hash value exists.
@@ -146,14 +204,8 @@ app.get('/verify/:token', async (req, res, next) =>
   );
 
   // Redirect to the login page.
-  if (process.env.NODE_ENV === 'production')
-  {
-    res.redirect("https://oceanlogger-046c28329f84.herokuapp.com/");
-  }
-  else
-  {
-    res.redirect("http://localhost:3000/");
-  }
+  res.redirect((process.env.NODE_ENV === 'production' ?
+  "https://oceanlogger-046c28329f84.herokuapp.com/" : "http://localhost:3000/"));
 });
 
 
