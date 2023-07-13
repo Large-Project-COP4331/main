@@ -3,28 +3,16 @@ import { Link } from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import md5 from './md5';
 
 const eye = <FontAwesomeIcon icon={faEye}/>;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>
 
 function Login()
 {
-    const app_name = 'oceanlogger-046c28329f84'
-    function buildPath(route)
-    {
-        if (process.env.NODE_ENV === 'production') 
-        {
-            return 'https://' + app_name +  '.herokuapp.com/' + route;
-        }
-        else
-        {        
-            return 'http://localhost:5000/' + route;
-        }
-    } 
-
     var loginName;
     var loginPassword;
+    const route = (process.env.NODE_ENV === 'production' ?
+    "https://oceanlogger-046c28329f84.herokuapp.com/api/login" : "http://localhost:5000/api/login");
 
     const [message,setMessage] = useState('');
     const [showPassword, setShowPassword] = useState(false);
@@ -38,29 +26,21 @@ function Login()
     {
         event.preventDefault();
 
-        var obj = {login:loginName.value,password:md5(loginPassword.value)};
-        var js = JSON.stringify(obj);
+        let jsonObject = JSON.stringify({login:loginName.value,password:loginPassword.value});
 
         try
         {    
-            var tmp = buildPath('api/login');
-            console.log(tmp);
-            const response = await fetch(buildPath('api/login'),
-                {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+            const response = await fetch(route,{method:'POST',body:jsonObject,headers:{'Content-Type': 'application/json'}});
+            let res = JSON.parse(await response.text());
 
-            var res = JSON.parse(await response.text());
-
-            if( res.id <= 0 )
+            if (res.error !== "")
             {
-                setMessage('User/Password combination incorrect');
-            }
-            else if (res.verification === false)
-            {
-                setMessage("Email is not verified.");
+                setMessage(res.error);
+                return;
             }
             else
             {
-                var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
+                var user = {id:res.id,firstName:res.firstName,lastName:res.lastName,email:res.email}
                 localStorage.setItem('user_data', JSON.stringify(user));
 
                 setMessage('');
@@ -69,7 +49,7 @@ function Login()
         }
         catch(e)
         {
-            alert(e.toString());
+            console.log(e.toString());
             return;
         }    
     };
