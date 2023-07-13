@@ -6,7 +6,6 @@ import { useNumberValidation} from '../hooks/useNumberValidation';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import md5 from './md5';
 
 const eye = <FontAwesomeIcon icon={faEye}/>;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>
@@ -138,7 +137,7 @@ function Register()
             firstName:registerFirstName.value,
             lastName:registerLastName.value,
             login:registerUsername.value,
-            password:md5(registerPassword.value),
+            password:registerPassword.value,
             email:registerEmail.value
         };
 
