@@ -156,7 +156,7 @@ function Register()
             // Check if an error is returned.
             if (res.error !== "")
             {
-                setMessage("Username is taken.");
+                setMessage(res.error);
             }
             else
             {
