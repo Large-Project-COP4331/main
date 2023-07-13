@@ -26,8 +26,8 @@ function Register()
         }
     }
     
-    let registerFirstName;
-    let registerLastName;
+    let registerFirstName = "DEFAULTNAME";
+    let registerLastName = "DEFAULTLASTNAME";
     let registerUsername;
     let registerPassword;
     let registerEmail;
