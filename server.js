@@ -44,8 +44,7 @@ app.post('/api/login', async (req, res, next) =>
   let ret =
   {
     id:document._id,
-    firstName:document.firstName,
-    lastName:document.lastName,
+    login:document.login,
     email:document.email,
     error:""
   };
@@ -57,7 +56,7 @@ app.post('/api/login', async (req, res, next) =>
 // Register API.
 app.post('/api/register', async (req, res, next) => 
 {
-  const {firstName, lastName, login, password, email} = req.body;
+  const {login, password, email} = req.body;
   const lowerLogin = login.toLowerCase();
   const lowerEmail = email.toLowerCase();
   const database = client.db("OceanLogger").collection("Users");
@@ -80,8 +79,6 @@ app.post('/api/register', async (req, res, next) =>
   let result = await database.insertOne
   (
     {
-      firstName:firstName,
-      lastName:lastName,
       login:lowerLogin,
       password:hashedPassword,
       email:lowerEmail,
@@ -97,7 +94,7 @@ app.post('/api/register', async (req, res, next) =>
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
   let str = (process.env.NODE_ENV === 'production' ?
-  `https://oceanlogger-046c28329f84.herokuapp.com/verify/${val}` : `http://localhost:5000/verify/${val}`);
+  `https://oceanlogger-046c28329f84.herokuapp.com/api/verify/${val}` : `http://localhost:5000/api/verify/${val}`);
 
   const msg =
   {
@@ -111,9 +108,8 @@ app.post('/api/register', async (req, res, next) =>
   .then(() => { console.log('Email sent.'); })
   .catch((error) => { console.error(error); });
 
-  // Returns this information.
-  let ret = {firstName:firstName, lastName:lastName, email:email, error:""};
-  res.status(200).json(ret);
+  // Returns no error on success.
+  res.status(200).json({error:""});
 });
 
 
@@ -191,7 +187,7 @@ app.post('/api/updatepassword', async (req,res,next) =>
 
 
 // Verification API - checks for valid hash.
-app.get('/verify/:token', async (req, res, next) =>
+app.get('/api/verify/:token', async (req, res, next) =>
 {
   // Get the token from the URL.
   const token = req.params.token;
@@ -211,7 +207,7 @@ app.get('/verify/:token', async (req, res, next) =>
 
   // Redirect to the login page.
   res.redirect((process.env.NODE_ENV === 'production' ?
-  "https://oceanlogger-046c28329f84.herokuapp.com/" : "http://localhost:3000/"));
+  "https://oceanlogger-046c28329f84.herokuapp.com/loginpage" : "http://localhost:3000/loginpage"));
 });
 
 
