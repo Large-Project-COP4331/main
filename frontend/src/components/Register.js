@@ -26,8 +26,6 @@ function Register()
         }
     }
     
-    let registerFirstName = "DEFAULTNAME";
-    let registerLastName = "DEFAULTLASTNAME";
     let registerUsername;
     let registerPassword;
     let registerEmail;
@@ -120,8 +118,7 @@ function Register()
         event.preventDefault();
 
         // Check for valid form inputs.
-        let str = RegisterCheck
-        (registerFirstName.value, registerLastName.value, registerUsername.value, registerPassword.value, registerEmail.value);
+        let str = RegisterCheck(registerUsername.value, registerPassword.value, registerEmail.value);
 
         if (str !== "")
         {
@@ -134,8 +131,6 @@ function Register()
         // Create a JSON object from the HTML form values.
         let obj =
         {
-            firstName:registerFirstName.value,
-            lastName:registerLastName.value,
             login:registerUsername.value,
             password:registerPassword.value,
             email:registerEmail.value
@@ -160,9 +155,6 @@ function Register()
             }
             else
             {
-                let user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
-                localStorage.setItem('user_data', JSON.stringify(user));
-
                 setMessage('Account created! Please check your email.');
             }
         }
@@ -302,18 +294,8 @@ function Register()
 export default Register;
 
 // Checks for valid form inputs.
-function RegisterCheck(first, last, username, password, email)
+function RegisterCheck(username, password, email)
 {
-    // First/Last can't be blank.
-    //if (first === "")
-    //{
-        //return "First name cannot be blank.";
-    //}
-    //else if (last === "")
-    //{
-        //return "Last name cannot be blank.";
-    //}
-
     // Check the username.
     let regex = /^[a-zA-Z\d]{8,16}$/;
     if (regex.test(username) === false)
