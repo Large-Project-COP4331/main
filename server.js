@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const saltRounds = 10;
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 const path = require("path");
+const { ObjectId } = require('mongodb');
 
 
 require('dotenv').config();
@@ -33,11 +35,11 @@ app.post('/api/login', async (req, res, next) =>
   // Check for valid login/password/verification.
   if (document == null || await bcrypt.compare(password, document.password) == false)
   {
-    return res.status(200).json({error:"Invalid Username/Password."});
+    return res.status(401).json({error:"Invalid Username/Password."});
   }
   else if (document.verification == false)
   {
-    return res.status(200).json({error:"Email is not verified."});
+    return res.status(401).json({error:"Email is not verified."});
   }
 
   // Returns this information.
@@ -48,6 +50,8 @@ app.post('/api/login', async (req, res, next) =>
     email:document.email,
     error:""
   };
+
+  // var token = jwt.sign(ret, process.env.ACCESS_KEY_SECRET);
   
   res.status(200).json(ret);
 });
@@ -64,11 +68,11 @@ app.post('/api/register', async (req, res, next) =>
   // Check if the username already exists.
   if (await database.findOne({login:lowerLogin}) != null)
   {
-    return res.status(200).json({error:"Username already exists."});
+    return res.status(409).json({error:"Username already exists."});
   }
   else if (await database.findOne({email:lowerEmail}) != null)
   {
-    return res.status(200).json({error:"Email is taken."});
+    return res.status(409).json({error:"Email is taken."});
   }
 
   // Create a unique hash value for verification.
@@ -122,11 +126,11 @@ app.post('/api/sendreset', async (req, res, next) =>
 
   if (document == null)
   {
-    return res.status(200).json({error:"No account associated with email provided."});
+    return res.status(401).json({error:"No account associated with email provided."});
   }
   else if (document.verification == false)
   {
-    return res.status(200).json({error:"Please verify the email before attempting a password reset."});
+    return res.status(401).json({error:"Please verify the email before attempting a password reset."});
   }
 
   // Generate and store a reset token.
@@ -170,7 +174,7 @@ app.post('/api/updatepassword', async (req,res,next) =>
   // Check for a valid reset token.
   if (token === null || await database.findOne({resetToken:token}) === null)
   {
-    return res.status(200).json({error:"Invalid Reset Token."});
+    return res.status(401).json({error:"Invalid Reset Token."});
   }
 
   let hashedPassword = await bcrypt.hash(password, saltRounds);
@@ -208,6 +212,129 @@ app.get('/api/verify/:token', async (req, res, next) =>
   // Redirect to the login page.
   res.redirect((process.env.NODE_ENV === 'production' ?
   "https://oceanlogger-046c28329f84.herokuapp.com/loginpage" : "http://localhost:3000/loginpage"));
+});
+
+
+// Create Scuba Log API
+app.post('/api/addlog', async (req,res,next) =>
+{
+  const {userid, title, firstDiveDepth, firstDiveTime, surfaceIntervalTime, secondDiveDepth, location, date, notes} = req.body;
+  const database = client.db("OceanLogger").collection("DiveLogs");
+
+  // Date should formatted perfectly when sent to the api (string)
+  // YYYY-MM-DD
+  // 2023-01-20
+
+  // Maybe also check if the userid exists before adding a dive log?
+
+  // const dateOnly = new Date(date).toISOString().split("T")[0];
+
+  let result = await database.insertOne
+  (
+    {
+      userid:userid,
+      title:title,
+      firstDiveDepth:firstDiveDepth,
+      firstDiveTime:firstDiveTime,
+      surfaceIntervalTime:surfaceIntervalTime,
+      secondDiveDepth:secondDiveDepth,
+      location:location,
+      date:date,
+      notes:notes
+    }
+  );
+  
+  res.status(200).json({error:""});
+});
+
+
+// Search Scuba Log API
+app.post('/api/searchlog', async (req,res,next) =>
+{
+  const {userid, title, location, startDate, endDate} = req.body;
+  const database = client.db("OceanLogger").collection("DiveLogs");
+
+  // console.log("Sent Date Range:" + startDate + " " + endDate);
+  // const dateOnly = new Date(startDate).toISOString().split("T")[0];
+  // const dateOnly2 = new Date(endDate).toISOString().split("T")[0];
+  
+  let result;
+
+  if (startDate == "" && endDate == "")
+  {
+    result = await database.find
+      (
+        {
+          userid:userid,
+          title: { $regex: title, $options: 'i'},
+          location: { $regex: location, $options: 'i'},
+        }
+      ).toArray();
+  }
+  else if(startDate == "" || endDate == "")
+  {
+    return res.status(200).json({error:"Both date fields must be either filled or empty."});
+  }
+  else
+  {
+    result = await database.find
+    (
+      {
+        userid:userid,
+        title: { $regex: title, $options: 'i'},
+        location: { $regex: location, $options: 'i'},
+        date: { $gte: startDate, $lte: endDate }
+      }
+    ).toArray();
+  }
+
+  res.status(200).json({result:result, error:""});
+});
+
+
+// Update Scuba Log API
+app.post('/api/updatelog', async (req,res,next) =>
+{
+  const {userid, logid, title, firstDiveDepth, firstDiveTime, surfaceIntervalTime, secondDiveDepth, location, date, notes} = req.body;
+  const database = client.db("OceanLogger").collection("DiveLogs");
+
+  let result = await database.findOneAndUpdate
+  (
+    {userid:userid, _id:new ObjectId(logid)},
+    {
+      $set:
+      {
+        title:title,
+        firstDiveDepth:firstDiveDepth,
+        firstDiveTime:firstDiveTime,
+        surfaceIntervalTime:surfaceIntervalTime,
+        secondDiveDepth:secondDiveDepth,
+        location:location,
+        date:date,
+        notes:notes
+      }
+    },
+    {returnDocument:"after"}
+  );
+  
+  res.status(200).json({result:result.value,error:""});
+});
+
+
+// Delete Scuba Log API
+app.delete('/api/deletelog/:logId', async (req, res, next) =>{
+  const {logId} = req.params;
+  const database = client.db("OceanLogger").collection("DiveLogs");
+
+    const logObjectId = new ObjectId(logId);
+    const {deletedCount} = await database.deleteOne({_id: logObjectId});
+
+  if(deletedCount === 1){
+    res.status(200).json({message:"Log deleted successfully"});
+  }
+  else{
+    res.status(200).json({error:"Log not found."});
+  }
 });
 
 
