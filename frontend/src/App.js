@@ -9,6 +9,7 @@ import ForgotPage from './pages/ForgotPage';
 import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import ResetPage from './pages/ResetPage';
+import AddLogPage from './pages/AddLogPage';
 
 function App() 
 {
@@ -20,6 +21,7 @@ function App()
       <Route path="/forgotpage" index element={<ForgotPage />} />
       <Route path="/registerpage" index element={<RegisterPage />} />
       <Route path="/homepage" index element={<HomePage/>} />
+      <Route path="/addlogpage" index element={<AddLogPage/>} />
       <Route path="/reset" index element={<ResetPage />} />
     </Routes>
   </BrowserRouter>
