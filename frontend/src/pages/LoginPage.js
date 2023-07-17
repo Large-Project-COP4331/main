@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {  Link } from "react-router-dom";
 
 import Login from '../components/Login';
-import logo from '../components/images/001-shark.png';
+import shark from '../components/images/006-shark-1.png';
 
 function LoginPage()
 {
@@ -64,7 +64,7 @@ function LoginPage()
                                         >
                                             Sign in
                                         </div>
-                                        <img className="Image" style={{width: '25%'}} src={logo} />
+                                        <img className="Image" style={{width: '25%'}} src={shark} />
                                     </div>
                                     
                                 </div>
@@ -77,7 +77,7 @@ function LoginPage()
                                         fontWeight: '400', 
                                         wordWrap: 'break-word'}}
                                     >
-                                        No Accound?<br/>
+                                        No Account?<br/>
                                     </span>
                                     <span style={{color: '#0089ED', 
                                         fontSize: 10, 
