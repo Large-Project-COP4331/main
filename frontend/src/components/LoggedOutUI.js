@@ -5,7 +5,7 @@ import shark from './images/006-shark-1.png';
 import log from './images/003-time.png';
 import eye from './images/004-biometric-recognition.png';
 import shield from './images/005-shield.png';
-
+import oceanfloor from './images/ocean_floor.png';
 
 function LoggedOutUI()
 {
