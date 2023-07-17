@@ -44,7 +44,7 @@ function Login()
                 localStorage.setItem('user_data', JSON.stringify(user));
 
                 setMessage('');
-                window.location.href = '/oceanlogger';
+                window.location.href = '/homepage';
             }
         }
         catch(e)
