@@ -90,6 +90,8 @@ const HomePage = () =>
                 </div>
             </div>
 
+            <div style={{height: 100}} />
+
             <div className="footer">
                 <div className="footerContent">
                     <div className="footerLogo">
