@@ -786,7 +786,7 @@
   justify-content: space-between;
 }
 
-.footerLogo
+.logo, .footerLogo
 {
   display: flex;
   flex-direction: row;
