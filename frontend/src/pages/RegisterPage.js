@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {  Link } from "react-router-dom";
 
 import Register from '../components/Register';
-import logo from '../components/images/001-shark.png';
+import shark from '../components/images/006-shark-1.png';
 
 function RegisterPage()
 {
@@ -62,7 +62,7 @@ function RegisterPage()
                                         >
                                             Sign up
                                         </div>
-                                        <img className="Image" style={{width: '25%'}} src={logo} />
+                                        <img className="Image" style={{width: '25%'}} src={shark} />
                                     </div>
                                     
                                 </div>
@@ -76,7 +76,7 @@ function RegisterPage()
                                         fontWeight: '400', 
                                         wordWrap: 'break-word'}}
                                     >
-                                        Have an Account ?<br/>
+                                        Have an Account?<br/>
                                     </span>
                                     <span style={{color: '#0089ED', 
                                         fontSize: 10, 
