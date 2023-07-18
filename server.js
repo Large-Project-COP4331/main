@@ -4,6 +4,7 @@ const cors = require('cors');
 const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const sgMail = require('@sendgrid/mail');
 
 const saltRounds = 10;
 
@@ -94,7 +95,6 @@ app.post('/api/register', async (req, res, next) =>
   );
   
   // Send an email to verify the account.
-  const sgMail = require('@sendgrid/mail');
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
   let str = (process.env.NODE_ENV === 'production' ?
@@ -143,7 +143,6 @@ app.post('/api/sendreset', async (req, res, next) =>
   );
 
   // Send an email with a link to reset.
-  const sgMail = require('@sendgrid/mail');
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
   let str = (process.env.NODE_ENV === 'production' ?
