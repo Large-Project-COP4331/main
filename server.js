@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const sgMail = require('@sendgrid/mail');
+const createJWT = require('./createJWT');
 
 const saltRounds = 10;
 
@@ -43,16 +44,10 @@ app.post('/api/login', async (req, res, next) =>
     return res.status(401).json({error:"Email is not verified."});
   }
 
-  // Returns this information.
-  let ret =
-  {
-    id:document._id,
-    login:document.login,
-    email:document.email,
-    error:""
-  };
+  let payload = {id:document._id, login:document.login, email:document.email};
 
-  // var token = jwt.sign(ret, process.env.ACCESS_KEY_SECRET);
+  // Create a JWT and return it.
+  let ret = createJWT.createToken(payload);
   
   res.status(200).json(ret);
 });
@@ -214,19 +209,17 @@ app.get('/api/verify/:token', async (req, res, next) =>
 });
 
 
-// Create Scuba Log API
+// Create Scuba Log API (date = YYYY-MM-DD)
 app.post('/api/addlog', async (req,res,next) =>
 {
-  const {userid, title, firstDiveDepth, firstDiveTime, surfaceIntervalTime, secondDiveDepth, location, date, notes} = req.body;
+  const {accessToken, userid, title, firstDiveDepth, firstDiveTime, surfaceIntervalTime, secondDiveDepth, location, date, notes} = req.body;
   const database = client.db("OceanLogger").collection("DiveLogs");
 
-  // Date should formatted perfectly when sent to the api (string)
-  // YYYY-MM-DD
-  // 2023-01-20
-
-  // Maybe also check if the userid exists before adding a dive log?
-
-  // const dateOnly = new Date(date).toISOString().split("T")[0];
+  // Check for valid JWT.
+  if (createJWT.isExpired(accessToken))
+  {
+    return res.status(200).json({error:"JWT is no longer valid."});
+  }
 
   let result = await database.insertOne
   (
@@ -242,21 +235,26 @@ app.post('/api/addlog', async (req,res,next) =>
       notes:notes
     }
   );
+
+  // Create a new JWT.
+  let ret = createJWT.refresh(accessToken);
   
-  res.status(200).json({error:""});
+  res.status(200).json(ret);
 });
 
 
 // Search Scuba Log API
 app.post('/api/searchlog', async (req,res,next) =>
 {
-  const {userid, title, location, startDate, endDate} = req.body;
+  const {accessToken, userid, title, location, startDate, endDate} = req.body;
   const database = client.db("OceanLogger").collection("DiveLogs");
 
-  // console.log("Sent Date Range:" + startDate + " " + endDate);
-  // const dateOnly = new Date(startDate).toISOString().split("T")[0];
-  // const dateOnly2 = new Date(endDate).toISOString().split("T")[0];
-  
+  // Check for valid JWT.
+  if (createJWT.isExpired(accessToken))
+  {
+    return res.status(200).json({error:"JWT is no longer valid."});
+  }
+
   let result;
 
   if (startDate == "" && endDate == "")
@@ -287,15 +285,25 @@ app.post('/api/searchlog', async (req,res,next) =>
     ).toArray();
   }
 
-  res.status(200).json({result:result, error:""});
+  let ret = createJWT.refresh(accessToken);
+
+  ret.result = result;
+
+  res.status(200).json(ret);
 });
 
 
 // Update Scuba Log API
 app.post('/api/updatelog', async (req,res,next) =>
 {
-  const {userid, logid, title, firstDiveDepth, firstDiveTime, surfaceIntervalTime, secondDiveDepth, location, date, notes} = req.body;
+  const {accessToken, userid, logid, title, firstDiveDepth, firstDiveTime, surfaceIntervalTime, secondDiveDepth, location, date, notes} = req.body;
   const database = client.db("OceanLogger").collection("DiveLogs");
+
+  // Check for valid JWT.
+  if (createJWT.isExpired(accessToken))
+  {
+    return res.status(200).json({error:"JWT is no longer valid."});
+  }
 
   let result = await database.findOneAndUpdate
   (
@@ -315,8 +323,12 @@ app.post('/api/updatelog', async (req,res,next) =>
     },
     {returnDocument:"after"}
   );
+
+  let ret = createJWT.refresh(accessToken);
+
+  ret.result = result.value;
   
-  res.status(200).json({result:result.value,error:""});
+  res.status(200).json(ret);
 });
 
 

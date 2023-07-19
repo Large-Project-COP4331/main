@@ -8,7 +8,7 @@ const navbarloggedin= () =>{
     {
 	    event.preventDefault();
 
-        localStorage.removeItem("user_data")
+        localStorage.removeItem("accessToken");
         window.location.href = '/';
 
     };
