@@ -40,9 +40,7 @@ function Login()
             }
             else
             {
-                var user = {id:res.id,login:res.login,email:res.email}
-                localStorage.setItem('user_data', JSON.stringify(user));
-
+                localStorage.setItem('accessToken', res.accessToken);
                 setMessage('');
                 window.location.href = '/homepage';
             }
