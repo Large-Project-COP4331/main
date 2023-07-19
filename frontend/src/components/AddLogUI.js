@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import jwt_decode from "jwt-decode";
 
 const eye = <FontAwesomeIcon icon={faEye}/>;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>;
@@ -16,6 +17,8 @@ function AddLogUI()
     let addLocation;
     let addDate;
     let addNote;
+    const route = (process.env.NODE_ENV === 'production' ?
+    "https://oceanlogger-046c28329f84.herokuapp.com/api/addlog" : "http://localhost:5000/api/addlog");
 
     const [message,setMessage] = useState('');
 
@@ -23,7 +26,48 @@ function AddLogUI()
     {
         event.preventDefault();
 
-        alert("doAdd()");
+        let accessToken = localStorage.getItem("accessToken");
+
+        if (accessToken == null)
+        {
+            setMessage("Invalid access token. Please sign in again.");
+            return;
+        }
+
+        let ud = jwt_decode(accessToken);
+
+        let jsonObject = JSON.stringify
+        ({
+            accessToken:accessToken,
+            userid:ud.id,
+            title:"Add New Log",
+            firstDiveDepth:diveData1.value,
+            firstDiveTime:diveData2.value,
+            surfaceIntervalTime:diveData3.value,
+            secondDiveDepth:diveData4.value,
+            location:addLocation.value,
+            date:addDate.value,
+            notes:addNote.value
+        });
+
+        try
+        {
+            const response = await fetch(route,{method:'POST',body:jsonObject,headers:{'Content-Type': 'application/json'}});
+            let res = JSON.parse(await response.text());
+
+            if (res.error !== "")
+            {
+                setMessage("API Error: " + res.error);
+                return;
+            }
+
+            localStorage.setItem('accessToken', res.accessToken);
+            window.location.href = '/homepage';
+        }
+        catch(e)
+        {
+            console.log(e);
+        }
     };
 
     const doCancel = async event => 
