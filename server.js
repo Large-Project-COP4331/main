@@ -212,7 +212,7 @@ app.get('/api/verify/:token', async (req, res, next) =>
 // Create Scuba Log API (date = YYYY-MM-DD)
 app.post('/api/addlog', async (req,res,next) =>
 {
-  const {accessToken, userid, title, firstDiveDepth, firstDiveTime, surfaceIntervalTime, secondDiveDepth, location, date, notes} = req.body;
+  const {accessToken, userid, title, location, date, diveTime, maxDepth, temperature, visibility, startAirPressure, endAirPressure, diveComputer, notes} = req.body;
   const database = client.db("OceanLogger").collection("DiveLogs");
 
   // Check for valid JWT.
@@ -226,12 +226,15 @@ app.post('/api/addlog', async (req,res,next) =>
     {
       userid:userid,
       title:title,
-      firstDiveDepth:firstDiveDepth,
-      firstDiveTime:firstDiveTime,
-      surfaceIntervalTime:surfaceIntervalTime,
-      secondDiveDepth:secondDiveDepth,
       location:location,
       date:date,
+      diveTime:diveTime,
+      maxDepth:maxDepth,
+      temperature:temperature,
+      visibility:visibility,
+      startAirPressure:startAirPressure,
+      endAirPressure:endAirPressure,
+      diveComputer:diveComputer,
       notes:notes
     }
   );
@@ -296,7 +299,7 @@ app.post('/api/searchlog', async (req,res,next) =>
 // Update Scuba Log API
 app.post('/api/updatelog', async (req,res,next) =>
 {
-  const {accessToken, userid, logid, title, firstDiveDepth, firstDiveTime, surfaceIntervalTime, secondDiveDepth, location, date, notes} = req.body;
+  const {accessToken, userid, logid, title, location, date, diveTime, maxDepth, temperature, visibility, startAirPressure, endAirPressure, diveComputer, notes} = req.body;
   const database = client.db("OceanLogger").collection("DiveLogs");
 
   // Check for valid JWT.
@@ -312,12 +315,15 @@ app.post('/api/updatelog', async (req,res,next) =>
       $set:
       {
         title:title,
-        firstDiveDepth:firstDiveDepth,
-        firstDiveTime:firstDiveTime,
-        surfaceIntervalTime:surfaceIntervalTime,
-        secondDiveDepth:secondDiveDepth,
         location:location,
         date:date,
+        diveTime:diveTime,
+        maxDepth:maxDepth,
+        temperature:temperature,
+        visibility:visibility,
+        startAirPressure:startAirPressure,
+        endAirPressure:endAirPressure,
+        diveComputer:diveComputer,
         notes:notes
       }
     },
