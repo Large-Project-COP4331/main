@@ -11,46 +11,26 @@ const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>;
 function ViewLogUI()
 {
     const [data, setData] = useState(null);
-    const [stop, setStop] = useState(false);
-
     const [message,setMessage] = useState('');
     const route = (process.env.NODE_ENV === 'production' ?
     "https://oceanlogger-046c28329f84.herokuapp.com/api/searchlog" : "http://localhost:5000/api/searchlog");
 
     // Don't question this, idk how it actually works.
-    useEffect(()=>
+    useEffect(() =>
     {
-        getData();
-
         if (localStorage.getItem("accessToken") == null)
         {
             window.location.href = '/';
         }
-
-    }, [stop]);
+        getData();
+    }, []);
 
     // Function to fetch data.
     const getData = async () => 
     {
         let accessToken = localStorage.getItem("accessToken");
-
-        if (accessToken == null)
-        {
-            setMessage("Invalid access token. Please sign in again.");
-            return;
-        }
-
         let ud = jwtDecode(accessToken);
-
-        let jsonObject = JSON.stringify
-        ({
-            accessToken:accessToken,
-            userid:ud.id,
-            title:"",
-            location:"",
-            startDate:"",
-            endDate:""
-        });
+        let jsonObject = JSON.stringify({accessToken:accessToken, userid:ud.id, title:"", location:"", startDate:"", endDate:""});
 
         try
         {
@@ -65,7 +45,6 @@ function ViewLogUI()
 
             localStorage.setItem('accessToken', res.accessToken);
             setData(res.result);
-            setStop(true);
         }
         catch(e)
         {
@@ -77,7 +56,6 @@ function ViewLogUI()
     const showLogs = () =>
     {
         // console.log(data);
-
         if (data == null)
         {
             return;
