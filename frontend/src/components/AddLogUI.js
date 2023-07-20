@@ -3,20 +3,25 @@ import { Link } from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import jwt_decode from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
 const eye = <FontAwesomeIcon icon={faEye}/>;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>;
 
 function AddLogUI()
 {
-    let diveData1;
-    let diveData2;
-    let diveData3;
-    let diveData4;
-    let addLocation;
-    let addDate;
-    let addNote;
+    let title;
+    let location;
+    let date;
+    let diveTime;
+    let maxDepth;
+    let temperature;
+    let visibility;
+    let startAirPressure;
+    let endAirPressure;
+    let diveComputer;
+    let notes;
+
     const route = (process.env.NODE_ENV === 'production' ?
     "https://oceanlogger-046c28329f84.herokuapp.com/api/addlog" : "http://localhost:5000/api/addlog");
 
@@ -34,20 +39,23 @@ function AddLogUI()
             return;
         }
 
-        let ud = jwt_decode(accessToken);
+        let ud = jwtDecode(accessToken);
 
         let jsonObject = JSON.stringify
         ({
             accessToken:accessToken,
             userid:ud.id,
-            title:"Add New Log",
-            firstDiveDepth:diveData1.value,
-            firstDiveTime:diveData2.value,
-            surfaceIntervalTime:diveData3.value,
-            secondDiveDepth:diveData4.value,
-            location:addLocation.value,
-            date:addDate.value,
-            notes:addNote.value
+            title:title.value,
+            location:location.value,
+            date:date.value,
+            diveTime:diveTime.value,
+            maxDepth:maxDepth.value,
+            temperature:temperature.value,
+            visibility:visibility.value,
+            startAirPressure:startAirPressure.value,
+            endAirPressure:endAirPressure.value,
+            diveComputer:diveComputer.value,
+            notes:notes.value
         });
 
         try
@@ -81,7 +89,24 @@ function AddLogUI()
         <div id="addLogUIDiv">
             <form className="addForm" onSubmit={doAdd}>
                 <div className="addInputs">
-                    <div className="diveDepths">
+
+
+                    <div className="notes">
+                        <div className="notesDiv">
+                            <label htmlFor="addNote">
+                                *Name
+                            </label>
+                            <input type="text" 
+                                className="addField" 
+                                id="addNote" 
+                                placeholder="Dive Site Name" 
+                                ref={(c) => title = c} 
+                            />
+                        </div>
+                    </div>
+
+
+                    {/* <div className="diveDepths">
                         <div className="data1">
                             <label htmlfor="diveData1">
                                 diveData1
@@ -127,46 +152,140 @@ function AddLogUI()
                                 ref={(c) => diveData4 = c} 
                             />
                         </div>
-                    </div>
+                    </div> */}
+
 
                     <div className="locationAndDate">
                         <div className="locationDiv">
                             <label htmlFor="addLocation">
-                                Location
+                                *Location
                             </label>
                             <input type="text" 
                                 className="addField" 
                                 id="addLocation" 
-                                placeholder="where did you dive"
-                                ref={(c) => addLocation = c}
+                                placeholder="Country, City"
+                                ref={(c) => location = c}
                             />
                         </div>
                         <div className="dateDiv">
                             <label htmlFor="addDate">
-                                Date
+                                *Date
                             </label>
                             <input type="text" 
                                 className="addField" 
                                 id="addDate" 
-                                placeholder="when did you dive"
-                                ref={(c) => addDate = c}
+                                placeholder="08/08/0808"
+                                ref={(c) => date = c}
                             />
                         </div>
-
-                        
                     </div>
                     
+
+                    <div className="locationAndDate">
+                        <div className="locationDiv">
+                            <label htmlFor="addLocation">
+                                Dive Time
+                            </label>
+                            <input type="text" 
+                                className="addField" 
+                                id="addLocation" 
+                                placeholder="Min."
+                                ref={(c) => diveTime = c}
+                            />
+                        </div>
+                        <div className="dateDiv">
+                            <label htmlFor="addDate">
+                                Maximum Depth
+                            </label>
+                            <input type="text" 
+                                className="addField" 
+                                id="addDate" 
+                                placeholder="Meters"
+                                ref={(c) => maxDepth = c}
+                            />
+                        </div>
+                    </div>
+
+
+                    <div className="locationAndDate">
+                        <div className="locationDiv">
+                            <label htmlFor="addLocation">
+                                Temperature
+                            </label>
+                            <input type="text" 
+                                className="addField" 
+                                id="addLocation" 
+                                placeholder="Fahrenheit"
+                                ref={(c) => temperature = c}
+                            />
+                        </div>
+                        <div className="dateDiv">
+                            <label htmlFor="addDate">
+                                Visibility
+                            </label>
+                            <input type="text" 
+                                className="addField" 
+                                id="addDate" 
+                                placeholder="Meters"
+                                ref={(c) => visibility = c}
+                            />
+                        </div>
+                    </div>
+
+
+                    <div className="locationAndDate">
+                        <div className="locationDiv">
+                            <label htmlFor="addLocation">
+                                Starting Air Pressure
+                            </label>
+                            <input type="text" 
+                                className="addField" 
+                                id="addLocation" 
+                                placeholder="Fahrenheit"
+                                ref={(c) => startAirPressure = c}
+                            />
+                        </div>
+                        <div className="dateDiv">
+                            <label htmlFor="addDate">
+                                Ending Air Pressure
+                            </label>
+                            <input type="text" 
+                                className="addField" 
+                                id="addDate" 
+                                placeholder="Meters"
+                                ref={(c) => endAirPressure = c}
+                            />
+                        </div>
+                    </div>
+
+
+                    <div className="locationAndDate">
+                        <div className="locationDiv">
+                            <label htmlFor="addLocation">
+                                Dive Computer
+                            </label>
+                            <input type="text" 
+                                className="addField" 
+                                id="addLocation" 
+                                placeholder="Name"
+                                ref={(c) => diveComputer = c}
+                            />
+                        </div>
+                        <div className="dateDiv">
+                        </div>
+                    </div>
+
 
                     <div className="notes">
                         <div className="notesDiv">
                             <label htmlFor="addNote">
                                 Notes
                             </label>
-                            <input type="text" 
+                            <textarea type="text" 
                                 className="addField" 
                                 id="addNote" 
                                 placeholder="Add notes..." 
-                                ref={(c) => addNote = c} 
+                                ref={(c) => notes = c} 
                             />
                         </div>
                         
