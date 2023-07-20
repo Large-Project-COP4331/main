@@ -182,7 +182,7 @@ function Register()
                         onBlur={()=>setShowEmailErr(true)}
                     />
 
-                    <label htmlFor="registerNumber" style={{marginLeft: '10px'}}>
+                    {/* <label htmlFor="registerNumber" style={{marginLeft: '10px'}}>
                         Contact Number:
                     </label>
                     <input type="text" 
@@ -193,7 +193,7 @@ function Register()
                         onChange={setRegisterNumber} 
                         onFocus={()=>setShowNumberErr(false)} 
                         onBlur={()=>setShowNumberErr(true)}
-                    />
+                    /> */}
 
                     <label htmlFor="registerUsername" style={{marginLeft: '10px'}}>
                         Username:
