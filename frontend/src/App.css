@@ -633,6 +633,15 @@
   word-wrap: 'break-word';
 }
 
+#whiteText
+{
+  color: white;
+  font-size: 74px;
+  font-family: 'Inter';
+  font-weight: 700;
+  word-wrap: 'break-word';
+}
+
 .scubbaDescription
 {
   width: 75%;
