@@ -1022,7 +1022,6 @@
 
 .logUIContent
 {
-  background-color: lightgray;
   height: 400px;
   width: 100%;
   display: flex;
@@ -1033,20 +1032,20 @@
 
 .listOfLogs
 {
-  background-color: lightcoral;
   height: 350px;
   width: 30%;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
+  padding: 10px 10px 10px 10px;
 }
 
 .selectedLog
 {
-  background-color: lightgreen;
   height: 350px;
   width: 70%;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
+  padding: 10px 10px 10px 10px;
 }
 
 .addLogContent
