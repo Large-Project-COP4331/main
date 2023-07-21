@@ -16,7 +16,7 @@ const navbarloggedin= () =>{
     return (
         <div>
             
-            <div class="left">
+            <div className="left">
                 <div className="Subbalogger" style={{width: 225, height: 49}}>
                         <span style={{color: 'black', 
                             fontSize: 32, 
@@ -44,7 +44,7 @@ const navbarloggedin= () =>{
                 </ul>
             </div>
             
-            <div class="right">
+            <div className="right">
                 <ul className="navBar">
                     <Link to="/" className="navLinks" onClick={doLogout}>Log Out</Link>
                 </ul>
