@@ -7,7 +7,7 @@ import NavBarLoggedIn from '../components/NavBarLoggedIn';
 
 import shark from '../components/images/006-shark-1.png';
 
-const DiveCalcPage = () =>
+const DiveCalculatorPage = () =>
 {
     return(
         <div className="diveCalcContent">
@@ -81,4 +81,4 @@ const DiveCalcPage = () =>
     );
 }
 
-export default DiveCalcPage;
+export default DiveCalculatorPage;
