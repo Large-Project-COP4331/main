@@ -11,6 +11,7 @@ import RegisterPage from './pages/RegisterPage';
 import HomePage from './pages/HomePage';
 import ResetPage from './pages/ResetPage';
 import AddLogPage from './pages/AddLogPage';
+import DiveCalculatorPage from './pages/DiveCalculatorPage';
 
 function App() 
 {
@@ -24,6 +25,7 @@ function App()
       <Route path="/homepage" index element={<HomePage/>} />
       <Route path="/addlogpage" index element={<AddLogPage/>} />
       <Route path="/reset" index element={<ResetPage />} />
+      <Route path="/divecalc" index element={<DiveCalculatorPage />} />
     </Routes>
   </BrowserRouter>
 
