@@ -1258,3 +1258,255 @@
   flex-direction: row;
   width: 100%;
 }
+
+.divCalcContent
+{
+  background-color: white;
+}
+
+.diveCalcTop
+{
+  display: flex;
+  flex-direction: row;
+  background-color: #0089ED;
+}
+
+.diveCalcTopLeft
+{
+  width: 20%;
+}
+
+.diveCalcTopMid
+{
+  width: 60%;
+  height: 100%;
+}
+
+.diveCalcTopRight
+{
+  width: 20%;
+}
+
+.diveCalcBoxTop
+{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-style: solid solid none solid;
+  border-width: thin;
+  border-color: gray;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  width: 100%;
+  height: 100%;/* get rid kinda of displays how want, resizing shows wonkyness*/
+  margin-top: 200px;
+  padding: 10px 10px 10px 10px;
+}
+
+.diveCalcBoxTopContent
+{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+}
+
+.diveCalcBoxTopLeft
+{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10%;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.diveCalcTitle
+{
+  color: black;
+  font-size: 25px;
+  font-weight: 700;
+
+}
+
+.diveCalcBoxTopMid
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 60%;
+}
+
+.diveCalcBoxTopRight
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 10%;
+}
+
+.diveCalcBottom
+{
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  width: 100%;
+}
+
+.diveCalcBottomLeft
+{
+  width: 20%;
+}
+
+.diveCalcBottomMid
+{
+  width: 60%;
+}
+
+.diveCalcBoxBottom
+{
+  width: 100%;
+}
+
+.diveCalcBottomRight
+{
+  width: 20%;
+}
+
+#diveCalcUIDiv
+{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-style: none solid solid solid;
+  border-width: thin;
+  border-color: gray;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+}
+
+.diveCalcForm
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+}
+
+.diveCalcInputs
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.diveCalcField
+{
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.lenSufaceInterval
+{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 10px 10px 10px 10px;
+}
+
+.surfaceIntervalHourDiv, .surfaceIntervalMinsDiv
+{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 10px 10px 10px 10px;
+}
+
+.firstDive
+{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 10px 10px 10px 10px;
+}
+
+.firstDiveDiv
+{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px 10px 10px;
+  width: 100%;
+}
+
+.firstTotalTime
+{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 10px 10px 10px 10px;
+}
+
+.firstTotalTimeDiv
+{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px 10px 10px;
+  width: 100%;
+}
+
+.secondDive
+{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 10px 10px 10px 10px;
+}
+
+.secondDiveDiv
+{
+  display: flex;
+  flex-direction: column;
+  margin: 10px 10px 10px 10px;
+  width: 100%;
+}
+
+#calcButton
+{
+  width: 50%;
+}
+
+.calcCancelButton
+{
+  width: 50%;
+  border-radius: 10px;
+  color: white;
+  background: #282c34;
+  border: 0;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.calcCancelButton:hover{
+  background-color:#52565c;
+}
+
+.diveCalcDivBottom
+{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
