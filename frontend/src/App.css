@@ -578,6 +578,27 @@
   flex-direction: row;
 }
 
+.navbar-nav .nav-link
+{
+  color: black;
+  border-radius: 10px;
+  &:hover
+  {
+    background-color: #0089ED;
+    color: white;
+  }
+}
+
+.navbar-nav .nav-link-loggedin
+{
+  color: white;
+  &:hover
+  {
+    background-color: white;
+    color: #0089ED;
+  }
+}
+
 .leftShark
 {
   display: flex;
