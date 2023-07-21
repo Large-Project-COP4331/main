@@ -53,7 +53,7 @@ const navbarloggedin= () =>{
                         <Nav.Link href="/homepage" className="nav-link-loggedin">
                             <i>{home}</i>
                         </Nav.Link>
-                        <Nav.Link href="#" className="nav-link-loggedin">
+                        <Nav.Link href="/divecalc" className="nav-link-loggedin">
                             <i>{calc}</i>
                         </Nav.Link>
          
