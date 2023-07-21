@@ -1033,7 +1033,7 @@
 .listOfLogs
 {
   background-color: #e5f3fd;
-  height: 350px;
+  height: 380px;
   width: 30%;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
@@ -1043,7 +1043,7 @@
 .selectedLog
 {
   background-color: #e5f3fd;
-  height: 350px;
+  height: 380px;
   width: 70%;
   border-top-right-radius: 20px;
   border-bottom-right-radius: 20px;
