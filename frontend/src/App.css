@@ -572,12 +572,6 @@
   margin-right: 1px;
 }
 
-.loggedOutContent
-{
-  display: flex;
-  flex-direction: row;
-}
-
 .navbar-nav .nav-link
 {
   color: black;
@@ -597,6 +591,12 @@
     background-color: white;
     color: #0089ED;
   }
+}
+
+.loggedOutContent
+{
+  display: flex;
+  flex-direction: row;
 }
 
 .leftShark
