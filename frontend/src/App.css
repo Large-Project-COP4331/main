@@ -456,6 +456,15 @@
   display: block;
 }
 
+.totalTimeErrMsg{
+  color: black;
+  display: none;
+}
+
+.totalTimeErrMsg.show{
+  display: block;
+}
+
 .valid
 {
   color: green;
