@@ -65,19 +65,39 @@ function ViewLogUI()
 
         // Can make this load a specific amount of items, rn it does all.
         const listItems = data.map((log, index) =>
-            <tbody key={index} onClick={() => setActive(index)}>
+            <tbody key={index} onClick={() => setActive(index)} className={`${active === index ? "activeCell" : ""}`}
+            style={{
+            borderWidth:"2px",
+            borderColor:"black",
+            borderStyle:"solid",
+            borderRadius:"10px",
+            borderColor:"#0089ED",
+            height:"65px"
+            }}>
             <tr>
-                <td>{log.title}</td>
-                <td>{log.date}</td>
+                <td style={{fontSize: "12.5px", fontWeight: 'bold', padding: '10px'}}>{log.title}</td>
+                <td style={{fontSize: "10px", textAlign: 'center'}}>{log.date}</td>
             </tr>
             <tr>
-                <td>{log.location}</td>
+                <td style={{padding:"9px", textAlign:"center"}}>
+                    <td style={{
+                    backgroundColor: '#0089ED',
+                    color: 'white',
+                    borderRadius: '10px',
+                    textAlign: 'center',
+                    width:"60px",
+                    height:"18.5px",
+                    fontSize:"11px",
+                    }}>
+                    {log.location}
+                    </td>
+                </td>
                 <td></td>
             </tr>
             </tbody>
         );
 
-        return <table>{listItems}</table>;
+        return <table style={{width:"105%"}}>{listItems}</table>;
     }
 
     // Loads a component for each log.
@@ -99,7 +119,7 @@ function ViewLogUI()
     return(
         <div id="viewLogUIDiv">
             <div className="logUIContent">
-                <div className="listOfLogs">
+                <div className="listOfLogs" style={{overflow:""}}>
                     {showLogs()}
                 </div>
                 
