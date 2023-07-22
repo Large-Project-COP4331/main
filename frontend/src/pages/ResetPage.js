@@ -23,6 +23,13 @@ function ResetPage()
     {
         event.preventDefault();
 
+        let regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[\d])(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/;
+        if (regex.test(newPassword.value) === false)
+        {
+            setMessage(<center>Invalid Password.<br/>Password should contain 1 upper/lower/digit/special character and have 8 characters minimum.</center>);
+            return;
+        }
+
         if (newPassword.value !== confirmPassword.value)
         {
             setMessage("Passwords do not match!");
