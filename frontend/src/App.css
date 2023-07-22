@@ -1520,3 +1520,8 @@
   flex-direction: row;
   width: 100%;
 }
+
+.activeCell
+{
+  background-color: lightgrey;
+}
