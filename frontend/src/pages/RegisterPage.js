@@ -12,7 +12,12 @@ function RegisterPage()
                 <div className='registerTopLeft'>
                     <div>
                         <div className="registerGoHome">
-                            <Link to="/" style={{color: 'white'}}>HOME</Link>
+                            <Link to="/" style={{color: 'white',
+                                  textDecoration: 'none',
+                                  fontWeight: 'bold'}}
+                            >
+                                HOME
+                            </Link>
                         </div>
                     </div>
 

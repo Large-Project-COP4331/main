@@ -12,7 +12,12 @@ function ForgotPage()
                 <div className='forgotTopLeft'>
                     <div>
                         <div className="forgotGoHome">
-                            <Link to="/" style={{color: 'white'}}>HOME</Link>
+                            <Link to="/" style={{color: 'white',
+                                  textDecoration: 'none',
+                                  fontWeight: 'bold'}}
+                            >
+                                HOME
+                            </Link>
                         </div>
                     </div>
                     <span id="forgotTopMessage" style={{color: 'white', marginLeft: '10px'}}>

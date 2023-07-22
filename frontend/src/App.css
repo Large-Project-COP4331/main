@@ -922,7 +922,7 @@
 
 #searchLogs
 {
-  border-radius: 20px;
+  border-radius: 10px;
   margin-right: 20px;
   width: 100%;
   padding: 5px 5px 5px 5px;
@@ -931,8 +931,8 @@
 #searchIcon
 {
   position: absolute;
-  top: 10%;
-  right: 0.1%;
+  top: 20%;
+  right: 2.5%;
 }
 
 #searchIcon:hover
@@ -964,7 +964,6 @@
   border-radius: 20px;
   background-color: black;
   color: white;
-  padding: 5px 5px 5px 5px;
 }
 
 #goAddButton:hover
@@ -1524,4 +1523,187 @@
 .activeCell
 {
   background-color: lightgrey;
+}
+
+#displayLogContent
+{
+  display: flex;
+  flex-direction: column;
+}
+
+.displayFirst
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #0089ED;
+  border-radius: 10px;
+  color: white;
+
+}
+
+.displayTitleLocation
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  width: 75%;
+  padding: 10px 10px 10px 10px;
+}
+
+.displayTitle
+{
+  display: flex;
+  justify-content: center;
+  margin-bottom: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.displayLocation
+{
+  display: flex;
+  justify-content: center;
+  margin-top: none;
+}
+
+.displayEdit
+{
+  border-radius: 10px;
+  width: 25%;
+  display: flex;
+  justify-content: right;
+  padding: 10px 10px 10px 10px;
+}
+
+#editButton:hover{
+  color: black;
+}
+
+.displaysecond
+{
+  display: flex;
+  justify-content: center;
+  padding: 10px 10px 10px 10px;
+  font-weight: bold;
+}
+
+.displayThird
+{
+  display: flex;
+  flex-direction: row;
+}
+
+.displayDive
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5f3fd;
+  width: 25%;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.displayDepth
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5f3fd;
+  width: 25%;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.displayTemp
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5f3fd;
+  width: 25%;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.displayVisibility
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5f3fd;
+  width: 25%;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.displayFourth
+{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.displayStartAirPressure
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5f3fd;
+  width: 33%;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+  
+}
+
+.displayEndAirPressure
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5f3fd;
+  width: 33%;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.displayDiveComp
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #e5f3fd;
+  width: 33%;
+  border-radius: 10px;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.displayFive
+{
+  display: flex;
+  padding: 10px 10px 10px 10px;
+}
+
+.displayNotes
+{
+  background-color: #e5f3fd;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px 10px 10px 10px;
 }

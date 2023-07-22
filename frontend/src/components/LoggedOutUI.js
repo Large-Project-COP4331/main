@@ -71,6 +71,8 @@ function LoggedOutUI()
                 </div>
             </div>
 
+            <div style={{height: 150}} />
+
             <div className="loggedOutBottom">
                 <div className="loggedOutBottomRegister">
                     <div className="loggedOutBottomRegisterText">
