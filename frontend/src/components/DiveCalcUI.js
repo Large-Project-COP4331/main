@@ -1025,22 +1025,22 @@ function DiveCalcUI()
                     </div>  
                 </div>
 
-                <div className="errMessages">
-                    <div className={showTotalTimeErr? "totalTimeErrMsg" : "show"}  >
-                            <ul>
-                                <p id="totalTimeValid" className={validTotalTime ? "valid" : "invalid"}>
-                                    You must enter total time of your first dive: ##:##
-                                </p>
-                            </ul>
-                    </div>
-                </div>
+                // <div className="errMessages">
+                //     <div className={showTotalTimeErr? "totalTimeErrMsg" : "show"}  >
+                //             <ul>
+                //                 <p id="totalTimeValid" className={validTotalTime ? "valid" : "invalid"}>
+                //                     You must enter total time of your first dive: ##:##
+                //                 </p>
+                //             </ul>
+                //     </div>
+                // </div>
                 
 
                 <div className="diveCalcDivBottom">
-                    <input type="submit" className="calcCancelButton" value = "Reset"
-                        onClick={doReset} /><br />
                     <input type="submit" id="calcButton" className="buttons" value = "Calculate"
                         onClick={doCalc} /><br />
+                    <input type="submit" className="calcCancelButton" value = "Reset"
+                        onClick={doReset} /><br />
                 </div>
                 
                 <span id="doCalcResult">{message}</span>
