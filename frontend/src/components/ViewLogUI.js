@@ -97,7 +97,7 @@ function ViewLogUI()
             </tbody>
         );
 
-        return <table style={{width:"105%"}}>{listItems}</table>;
+        return <table style={{width:"100%"}}>{listItems}</table>;
     }
 
     // Loads a component for each log.
