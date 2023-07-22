@@ -12,7 +12,12 @@ function LoginPage()
                 <div className='loginTopLeft'>
                     <div>
                         <div className="loginGoHome">
-                            <Link to="/" style={{color: 'white'}}>HOME</Link>
+                            <Link to="/" style={{color: 'white',
+                                  textDecoration: 'none',
+                                  fontWeight: 'bold'}}
+                            >
+                                HOME
+                            </Link>
                         </div>
                     </div>
 
