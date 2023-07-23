@@ -8,6 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 import { faHouse } from '@fortawesome/free-solid-svg-icons';
 import { faCalculator } from '@fortawesome/free-solid-svg-icons';
+import jwtDecode from 'jwt-decode';
 
 const logout = <FontAwesomeIcon icon={faArrowRightFromBracket} />
 const home = <FontAwesomeIcon icon={faHouse} />
@@ -15,6 +16,23 @@ const calc = <FontAwesomeIcon icon={faCalculator} />
 
 const navbarloggedin= () =>{
 
+    const getName = () =>
+    {
+        let data, name = "";
+        if ((data = localStorage.getItem('accessToken')) == null)
+        {
+            return;
+        }
+        try
+        {
+            name = jwtDecode(data).login;
+        }
+        catch(e)
+        {
+            console.log(e);
+        }
+        return (name);
+    }
 
     const doLogout = event => 
     {
@@ -60,7 +78,7 @@ const navbarloggedin= () =>{
                     </Nav>
                     <Nav>
                         <Navbar.Text style={{color: 'white', marginRight: '10px'}}>
-                            Name
+                            {getName()}
                         </Navbar.Text>
                         <Nav.Link href="/welome" 
                                   className="nav-link-loggedin" 
