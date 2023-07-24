@@ -1044,35 +1044,35 @@
   padding: 10px 10px 10px 10px;
 }
 
-.addLogContent
+.addLogContent, .editLogContent
 {
   background-color: white;
 }
 
-.addLogTop
+.addLogTop, .editLogTop
 {
   display: flex;
   flex-direction: row;
   background-color: #0089ED;
 }
 
-.addLogTopLeft
+.addLogTopLeft, .editLogTopLeft
 {
   width: 20%;
 }
 
-.addLogTopMid
+.addLogTopMid, .editLogTopMid
 {
   width: 60%;
   height: 100%;
 }
 
-.addLogTopRight
+.addLogTopRight, .editLogTopRight
 {
   width: 20%;
 }
 
-.addLogBoxTop
+.addLogBoxTop, .editLogBoxTop
 {
   display:flex;
   flex-direction: row;
@@ -1090,7 +1090,7 @@
   padding: 10px 10px 10px 10px;
 }
 
-.addLogBoxTopContent
+.addLogBoxTopContent, .editLogBoxTopContent
 {
   display: flex;
   flex-direction: row;
@@ -1098,7 +1098,7 @@
 
 }
 
-.addLogTitle
+.addLogTitle, .editLogTitle
 {
   color: black;
   font-size: 40px;
@@ -1108,7 +1108,7 @@
 
 }
 
-.addLogAddLog
+.addLogAddLog, .editLogEditLog
 {
   display: flex;
   justify-content: center;
@@ -1116,7 +1116,7 @@
   margin-bottom: 10px;
 }
 
-.addLogBottom
+.addLogBottom, .editLogBottom
 {
   display: flex;
   flex-direction: row;
@@ -1124,30 +1124,30 @@
   width: 100%;
 }
 
-.addLogBottomLeft
+.addLogBottomLeft, .editLogBottomLeft
 {
   width: 20%;
   /*background-color: green;*/
 }
 
-.addLogBottomMid
+.addLogBottomMid, .editLogBottomMid
 {
   width: 60%;
   /*background-color: orange;*/
 }
 
-.addLogBoxBottom
+.addLogBoxBottom, .editLogBoxBottom
 {
   width: 100%;
 }
 
-.addLogBottomRight
+.addLogBottomRight, .eidtLogBottomRight
 {
   width: 20%;
   /*background-color: pink;*/
 }
 
-#addLogUIDiv
+#addLogUIDiv, #editLogUIDiv
 {
   display:flex;
   flex-direction: row;
@@ -1163,7 +1163,7 @@
   padding: 10px 10px 10px 10px;
 }
 
-.addForm
+.addForm, .editForm
 {
   display: flex;
   flex-direction: column;
@@ -1172,7 +1172,7 @@
   padding: 10px 10px 10px 10px;
 }
 
-.addInputs
+.addInputs, .editInputs
 {
   display: flex;
   flex-direction: column;
@@ -1180,7 +1180,7 @@
   width: 100%;
 }
 
-.addField
+.addField, .editField
 {
   border-radius: 10px;
   padding: 10px 10px 10px 10px;
@@ -1234,12 +1234,12 @@
   width: 100%;
 }
 
-#addLogButton
+#addLogButton, #editLogButton
 {
   width: 50%;
 }
 
-.addCancelButton
+.addCancelButton, .editCancelButton
 {
   width: 50%;
   border-radius: 10px;
@@ -1256,7 +1256,11 @@
   background-color:#52565c;
 }
 
-.addLogDivBottom
+.editCancelButton:hover{
+  background-color:#52565c;
+}
+
+.addLogDivBottom, .editLogDivBottom
 {
   display: flex;
   flex-direction: row;
