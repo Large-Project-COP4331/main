@@ -1020,13 +1020,14 @@
   margin-right: 20px;
   width: 100%;
   padding: 5px 5px 5px 5px;
+  position: relative;
 }
 
 #searchIcon
 {
   position: absolute;
-  top: 20%;
-  right: 2.5%;
+  top: 27%;
+  right: 4%;
 }
 
 #searchIcon:hover
