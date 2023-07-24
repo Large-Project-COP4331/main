@@ -996,6 +996,16 @@
   width: 100%;
 }
 
+.viewLogTop
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 10px 10px 10px;
+  
+}
+
 .viewLogPagination
 {
   display: flex;
