@@ -223,12 +223,28 @@ function ViewLogUI()
     return(
         <div id="viewLogUIDiv">
             <div className="viewLogTop">
-
-
-                <div>Page {(data !== null && data.length !== 0 ? pageNumber:0)} of {(data !== null ? Math.ceil(data.length / displayNum):"")}</div>
-                <button onClick={() => doPrev()}>Prev</button>
-                <button onClick={() => doNext()}>Next</button>
-
+        
+                <div className="viewLogPagination">
+                    <div className="viewLogPgButtons">
+                        <button id="paginationBtns" 
+                                onClick={() => doPrev()}
+                                style={{marginLeft: 0}}
+                        >
+                            Prev
+                        </button>
+                        <div className="viewLogPgNum">
+                            Page <br /> 
+                            {(data !== null && data.length !== 0 ? pageNumber:0)} of  {" "}
+                            {(data !== null ? Math.ceil(data.length / displayNum):"")}
+                        </div>
+                        <button id="paginationBtns"
+                                onClick={() => doNext()}
+                                style={{marginRight: 30}}
+                        >
+                            Next
+                        </button>
+                    </div>
+                </div>
 
                 <div className="viewLogSearchLog">
                         <input
