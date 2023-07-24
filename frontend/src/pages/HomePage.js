@@ -50,21 +50,11 @@ const HomePage = () =>
                             </div>
 
                             <div className="homepageBoxTopMid">
-                                <div className="homepageSearchLog">
-                                    <input
-                                        id="searchLogs"
-                                        type="text"
-                                        placeholder="Search Logs"
-                                    />
-                                    <i id="searchIcon" onClick={doSearch}>{search}</i>
-                                </div>
+                                {/*moved searchbar to ViewLogUI*/}
                             </div>
 
                             <div className="homepageBoxTopRight">
-                                <div className="homepageAddLog">
-                                    <button id="goAddButton" 
-                                        onClick={doAdd}><i>{plus}</i></button>
-                                </div>
+                                {/*moved add log button to ViewLogUI*/}
                             </div>
                         </div>
                     </div>

@@ -9,6 +9,7 @@ import DisplayLog from './DisplayLog';
 
 const eye = <FontAwesomeIcon icon={faEye}/>;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>;
+const plus = <FontAwesomeIcon icon={faPlus} />;
 const deleteIcon = <FontAwesomeIcon icon={faTrashCan}/>;
 
 function ViewLogUI()
@@ -131,6 +132,21 @@ function ViewLogUI()
 
     return(
         <div id="viewLogUIDiv">
+            <div className="viewLogTop">
+                <div className="viewLogSearchLog">
+                        <input
+                            id="searchLogs"
+                            type="text"
+                            placeholder="Search Logs"
+                        />
+                        <i id="searchIcon" onClick={doSearch}>{search}</i>
+                </div>
+                <div className="viewLogAddLog">
+                    <button id="goAddButton" 
+                    onClick={doAdd}><i>{plus}</i></button>
+                </div>
+            </div>
+        
             <div className="logUIContent">
                 <div className="listOfLogs" style={{overflow:""}}>
                     {showLogs()}

@@ -891,15 +891,14 @@
 {
   margin-top: 10px;
   margin-bottom: 10px;
-  margin-left: 10%;
   width: 20%;
 }
 
 .homepageLogs
 {
   color: black;
-  font-size: 25px;
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 640;
 
 }
 
@@ -918,27 +917,6 @@
   margin-top: 10px;
   width: 95%;
   position: relative;
-}
-
-#searchLogs
-{
-  border-radius: 10px;
-  margin-right: 20px;
-  width: 100%;
-  padding: 5px 5px 5px 5px;
-}
-
-#searchIcon
-{
-  position: absolute;
-  top: 20%;
-  right: 2.5%;
-}
-
-#searchIcon:hover
-{
-  
-  color: #0089ED ;
 }
 
 .homepageBoxTopRight
@@ -1017,6 +995,54 @@
   border-bottom-right-radius: 20px;
   width: 100%;
   padding: 10px 10px 10px 10px;
+}
+
+.viewLogTop
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+.viewLogSearchLog
+{
+  display: flex;
+  width: 95%;
+  position: relative;
+}
+
+#searchLogs
+{
+  border-radius: 10px;
+  margin-right: 20px;
+  width: 100%;
+  padding: 5px 5px 5px 5px;
+  position: relative;
+}
+
+#searchIcon
+{
+  position: absolute;
+  top: 27%;
+  right: 4%;
+}
+
+#searchIcon:hover
+{
+  
+  color: #0089ED ;
+}
+
+.viewLogAddLog
+{
+  display: flex;
+  justify-content: center;
+  width: 5%;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .logUIContent
@@ -1334,8 +1360,8 @@
 .diveCalcTitle
 {
   color: black;
-  font-size: 25px;
-  font-weight: 700;
+  font-size: 40px;
+  font-weight: 640;
 
 }
 
