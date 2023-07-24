@@ -1580,6 +1580,10 @@
   color: black;
 }
 
+#deleteButton:hover{
+  color: red
+}
+
 .displaysecond
 {
   display: flex;
