@@ -69,7 +69,16 @@ function DisplayLog({data})
             <div className="displayFive">
                 <div className="displayNotes">
                     <p style={{fontWeight: 'bold'}}>Notes:</p>
-                    {data.notes}
+                    <textarea defaultValue={data.notes} readOnly style={{
+                        minHeight:"52px",
+                        maxHeight:"400px",
+                        display:"block",
+                        width:"100%",
+                        border:"none",
+                        outline:"none",
+                        background:"none",
+                        }}>
+                    </textarea>
                 </div>
             </div>
         </div>
