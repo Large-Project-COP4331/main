@@ -1576,6 +1576,10 @@
   padding: 10px 10px 10px 10px;
 }
 
+#editButton{
+  color: white;
+}
+
 #editButton:hover{
   color: black;
 }
