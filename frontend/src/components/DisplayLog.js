@@ -1,19 +1,12 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 const edit = <FontAwesomeIcon icon={faPenToSquare} />;
 
 function DisplayLog({data})
 {
-    // Can add 2 functions in here, one for deleting the log and one for updating it?
-    const doEdit = async event => 
-    {
-        event.preventDefault();
-
-        window.location.href="/editlogpage";
-    };
-
     return (
         <div id="displayLogContent">
             <div className="displayFirst">
@@ -26,7 +19,8 @@ function DisplayLog({data})
                     </div>
                 </div>
                 <div className="displayEdit">
-                    <i id="editButton" onClick={doEdit}>{edit}</i>
+                    {/* <i id="editButton" onClick={doEdit}>{edit}</i> */}
+                    <Link id="editButton" to="/editlogpage" state={{data:data}}>{edit}</Link>
                 </div>
             </div>
 
