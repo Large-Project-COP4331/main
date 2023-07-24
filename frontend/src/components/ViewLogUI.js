@@ -8,6 +8,8 @@ import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import jwtDecode from 'jwt-decode';
 import DisplayLog from './DisplayLog';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const eye = <FontAwesomeIcon icon={faEye}/>;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>;
@@ -22,6 +24,15 @@ function ViewLogUI()
     const [message,setMessage] = useState('');
     const route = (process.env.NODE_ENV === 'production' ?
     "https://oceanlogger-046c28329f84.herokuapp.com/api/searchlog" : "http://localhost:5000/api/searchlog");
+    const [show, setShow] = useState(false);
+    // add something to pass to do delete?
+    const handleClose = () =>
+    {
+        setShow(false);
+        //on clicking the delete button will do delete
+        //doDelete();
+    } 
+    const handleShow = () => setShow(true);
 
     // Don't question this, idk how it actually works.
     useEffect(() =>
@@ -168,6 +179,22 @@ function ViewLogUI()
             <div className="logUIContent">
                 <div className="listOfLogs" style={{overflow:""}}>
                     {showLogs()}
+                    <>
+                        <Modal show={show} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                            <Modal.Title>Confirm Delete</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>Are you sure you want to delete this log?</Modal.Body>
+                            <Modal.Footer>
+                            <Button variant="dark" onClick={handleClose}>
+                                Cancel
+                            </Button>
+                            <Button variant="danger" onClick={handleClose}>
+                                Delete
+                            </Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </>
                 </div>
                 
                 <div className="selectedLog" style={{overflow:"auto"}}>
