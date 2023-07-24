@@ -8,7 +8,7 @@ import jwtDecode from "jwt-decode";
 const eye = <FontAwesomeIcon icon={faEye}/>;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>;
 
-function EditLogUI()
+function EditLogUI({data})
 {
     let title;
     let location;
@@ -23,7 +23,7 @@ function EditLogUI()
     let notes;
 
     const route = (process.env.NODE_ENV === 'production' ?
-    "https://oceanlogger-046c28329f84.herokuapp.com/api/addlog" : "http://localhost:5000/api/addlog");
+    "https://oceanlogger-046c28329f84.herokuapp.com/api/updatelog" : "http://localhost:5000/api/updatelog");
 
     const [message,setMessage] = useState('');
 
@@ -45,6 +45,7 @@ function EditLogUI()
         ({
             accessToken:accessToken,
             userid:ud.id,
+            logid:data._id,
             title:title.value,
             location:location.value,
             date:date.value,
@@ -96,7 +97,7 @@ function EditLogUI()
                             <label htmlFor="addNote">
                                 *Name
                             </label>
-                            <input type="text" 
+                            <input type="text" defaultValue={data.title} 
                                 className="addField" 
                                 id="addNote" 
                                 placeholder="Dive Site Name" 
@@ -110,7 +111,7 @@ function EditLogUI()
                             <label htmlFor="addLocation">
                                 *Location
                             </label>
-                            <input type="text" 
+                            <input type="text" defaultValue={data.location} 
                                 className="addField" 
                                 id="addLocation" 
                                 placeholder="Country, City"
@@ -121,7 +122,7 @@ function EditLogUI()
                             <label htmlFor="addDate">
                                 *Date
                             </label>
-                            <input type="text" 
+                            <input type="text" defaultValue={data.date} 
                                 className="addField" 
                                 id="addDate" 
                                 placeholder="08/08/0808"
@@ -136,7 +137,7 @@ function EditLogUI()
                             <label htmlFor="addLocation">
                                 Dive Time
                             </label>
-                            <input type="text" 
+                            <input type="text" defaultValue={data.diveTime} 
                                 className="addField" 
                                 id="addLocation" 
                                 placeholder="Min."
@@ -147,7 +148,7 @@ function EditLogUI()
                             <label htmlFor="addDate">
                                 Maximum Depth
                             </label>
-                            <input type="text" 
+                            <input type="text" defaultValue={data.maxDepth} 
                                 className="addField" 
                                 id="addDate" 
                                 placeholder="Meters"
@@ -162,7 +163,7 @@ function EditLogUI()
                             <label htmlFor="addLocation">
                                 Temperature
                             </label>
-                            <input type="text" 
+                            <input type="text" defaultValue={data.temperature} 
                                 className="addField" 
                                 id="addLocation" 
                                 placeholder="Fahrenheit"
@@ -173,7 +174,7 @@ function EditLogUI()
                             <label htmlFor="addDate">
                                 Visibility
                             </label>
-                            <input type="text" 
+                            <input type="text" defaultValue={data.visibility} 
                                 className="addField" 
                                 id="addDate" 
                                 placeholder="Meters"
@@ -188,7 +189,7 @@ function EditLogUI()
                             <label htmlFor="addLocation">
                                 Starting Air Pressure
                             </label>
-                            <input type="text" 
+                            <input type="text" defaultValue={data.startAirPressure} 
                                 className="addField" 
                                 id="addLocation" 
                                 placeholder="Fahrenheit"
@@ -199,7 +200,7 @@ function EditLogUI()
                             <label htmlFor="addDate">
                                 Ending Air Pressure
                             </label>
-                            <input type="text" 
+                            <input type="text" defaultValue={data.endAirPressure} 
                                 className="addField" 
                                 id="addDate" 
                                 placeholder="Meters"
@@ -214,7 +215,7 @@ function EditLogUI()
                             <label htmlFor="addLocation">
                                 Dive Computer
                             </label>
-                            <input type="text" 
+                            <input type="text" defaultValue={data.diveComputer} 
                                 className="addField" 
                                 id="addLocation" 
                                 placeholder="Name"
@@ -231,7 +232,7 @@ function EditLogUI()
                             <label htmlFor="addNote">
                                 Notes
                             </label>
-                            <textarea type="text" 
+                            <textarea type="text" defaultValue={data.notes} 
                                 className="addField" 
                                 id="addNote" 
                                 placeholder="Add notes..." 
