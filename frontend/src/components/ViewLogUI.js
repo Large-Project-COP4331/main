@@ -17,6 +17,9 @@ const plus = <FontAwesomeIcon icon={faPlus} />;
 const deleteIcon = <FontAwesomeIcon icon={faTrashCan}/>;
 const search = <FontAwesomeIcon icon={faMagnifyingGlass} />
 
+// Number of logs to show on a page.
+const displayNum = 7;
+
 function ViewLogUI()
 {
     var searchString = "";
@@ -28,6 +31,10 @@ function ViewLogUI()
     "https://oceanlogger-046c28329f84.herokuapp.com/api/searchlog" : "http://localhost:5000/api/searchlog");
     const [show, setShow] = useState(false);
     const [deleteIndex, setDeleteIndex] = useState(null);
+
+    const [lower, setLower] = useState(0);
+    const [upper, setUpper] = useState(displayNum);
+    const [pageNumber, setPageNumber] = useState(1);
 
     // add something to pass to do delete?
     const handleClose = () =>
@@ -86,7 +93,7 @@ function ViewLogUI()
         }
 
         // Can make this load a specific amount of items, rn it does all.
-        const listItems = data.map((log, index) =>
+        const listItems = data.slice(lower, upper).map((log, index) =>
             <tbody key={index} onClick={() => setActive(index)} className={`${active === index ? "activeCell" : ""}`}
             style={{
             borderWidth:"2px",
@@ -168,6 +175,10 @@ function ViewLogUI()
 
         getData();
         setActive(0);
+        if (data.length % displayNum == 1)
+        {
+            doPrev();
+        }
     }
 
     const doSearch = (str) =>
@@ -179,11 +190,46 @@ function ViewLogUI()
         );
 
         setData(items);
+        setLower(0);
+        setUpper(displayNum);
+        setPageNumber(1);
+    }
+
+    // For pagination.
+    const doPrev = () =>
+    {
+        if (lower - displayNum < 0)
+        {
+            return;
+        }
+
+        setLower(lower - displayNum);
+        setUpper(upper - displayNum);
+        setPageNumber(pageNumber - 1);
+    }
+
+    const doNext = () =>
+    {
+        if (upper + displayNum >= data.length + displayNum)
+        {
+            return;
+        }
+
+        setLower(lower + displayNum);
+        setUpper(upper + displayNum);
+        setPageNumber(pageNumber + 1);
     }
 
     return(
         <div id="viewLogUIDiv">
             <div className="viewLogTop">
+
+
+                <div>Page {(data !== null && data.length !== 0 ? pageNumber:0)} of {(data !== null ? Math.ceil(data.length / displayNum):"")}</div>
+                <button onClick={() => doPrev()}>Prev</button>
+                <button onClick={() => doNext()}>Next</button>
+
+
                 <div className="viewLogSearchLog">
                         <input
                             id="searchLogs"
