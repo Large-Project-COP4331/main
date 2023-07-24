@@ -110,7 +110,7 @@ function ViewLogUI()
                     </td>
                 </td>
                 <td style={{fontSize: "15px", textAlign: 'center'}}>
-                    <i id="deleteButton" onClick={doDelete}>{deleteIcon}</i>
+                    <i id="deleteButton" onClick={handleShow}>{deleteIcon}</i>
                 </td>
                 <td></td>
             </tr>
