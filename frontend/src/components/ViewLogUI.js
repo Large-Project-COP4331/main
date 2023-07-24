@@ -4,6 +4,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import jwtDecode from 'jwt-decode';
 import DisplayLog from './DisplayLog';
 
@@ -11,6 +13,7 @@ const eye = <FontAwesomeIcon icon={faEye}/>;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>;
 const plus = <FontAwesomeIcon icon={faPlus} />;
 const deleteIcon = <FontAwesomeIcon icon={faTrashCan}/>;
+const search = <FontAwesomeIcon icon={faMagnifyingGlass} />
 
 function ViewLogUI()
 {
@@ -122,12 +125,27 @@ function ViewLogUI()
         return listItems;
     }
 
+    // goes to add log page
+    const doAdd = async event => 
+    {
+        event.preventDefault();
+
+        window.location.href="/addlogpage";
+    };
+
     // deletes a log
     const doDelete = async event =>
     {
         event.preventDefault();
 
         alert("doDelete()");
+    }
+
+    const doSearch = async event =>
+    {
+        event.preventDefault();
+
+        alert("doSearch()");
     }
 
     return(
