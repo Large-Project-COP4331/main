@@ -19,18 +19,22 @@ const search = <FontAwesomeIcon icon={faMagnifyingGlass} />
 
 function ViewLogUI()
 {
+    var searchString = "";
+    const [mainData, setMainData] = useState(null);
     const [data, setData] = useState(null);
     const [active, setActive] = useState(0);
     const [message,setMessage] = useState('');
     const route = (process.env.NODE_ENV === 'production' ?
     "https://oceanlogger-046c28329f84.herokuapp.com/api/searchlog" : "http://localhost:5000/api/searchlog");
     const [show, setShow] = useState(false);
+    const [deleteIndex, setDeleteIndex] = useState(null);
+
     // add something to pass to do delete?
     const handleClose = () =>
     {
         setShow(false);
         //on clicking the delete button will do delete
-        //doDelete();
+        doDelete();
     } 
     const handleShow = () => setShow(true);
 
@@ -64,6 +68,7 @@ function ViewLogUI()
 
             localStorage.setItem('accessToken', res.accessToken);
             setData(res.result);
+            setMainData(res.result);
         }
         catch(e)
         {
@@ -89,7 +94,8 @@ function ViewLogUI()
             borderStyle:"solid",
             borderRadius:"10px",
             borderColor:"#0089ED",
-            height:"65px"
+            height:"65px",
+            wordWrap:"break-word"
             }}>
             <tr>
                 <td style={{fontSize: "12.5px", fontWeight: 'bold', padding: '10px'}}>{log.title}</td>
@@ -110,14 +116,13 @@ function ViewLogUI()
                     </td>
                 </td>
                 <td style={{fontSize: "15px", textAlign: 'center'}}>
-                    <i id="deleteButton" onClick={handleShow}>{deleteIcon}</i>
+                    <i id="deleteButton" onClick={() => {handleShow(); setDeleteIndex(index);}}>{deleteIcon}</i>
                 </td>
-                <td></td>
             </tr>
             </tbody>
         );
 
-        return <table style={{width:"100%"}}>{listItems}</table>;
+        return <table style={{tableLayout:"fixed", width:"100%"}}>{listItems}</table>;
     }
 
     // Loads a component for each log.
@@ -145,18 +150,35 @@ function ViewLogUI()
     };
 
     // deletes a log
-    const doDelete = async event =>
+    const doDelete = async () =>
     {
-        event.preventDefault();
+        let logid = data[deleteIndex]._id;
 
-        alert("doDelete()");
+        let deleteRoute = (process.env.NODE_ENV === 'production' ?
+        `https://oceanlogger-046c28329f84.herokuapp.com/api/deletelog/${logid}` : `http://localhost:5000/api/deletelog/${logid}`);
+
+        try
+        {
+            const response = await fetch(deleteRoute, {method:'DELETE'});
+        }
+        catch(e)
+        {
+            console.log(e);
+        }
+
+        getData();
+        setActive(0);
     }
 
-    const doSearch = async event =>
+    const doSearch = (str) =>
     {
-        event.preventDefault();
+        let items = mainData.filter(log =>
+            log.title.toLowerCase().includes(str.toLowerCase()) ||
+            log.location.toLowerCase().includes(str.toLowerCase()) ||
+            log.date.toLowerCase().includes(str.toLowerCase())
+        );
 
-        alert("doSearch()");
+        setData(items);
     }
 
     return(
@@ -167,8 +189,10 @@ function ViewLogUI()
                             id="searchLogs"
                             type="text"
                             placeholder="Search Logs"
+                            ref={(c) => searchString = c}
+                            onKeyUp={() => doSearch(searchString.value)}
                         />
-                        <i id="searchIcon" onClick={doSearch}>{search}</i>
+                        <i id="searchIcon">{search}</i>
                 </div>
                 <div className="viewLogAddLog">
                     <button id="goAddButton" 
@@ -177,16 +201,16 @@ function ViewLogUI()
             </div>
         
             <div className="logUIContent">
-                <div className="listOfLogs" style={{overflow:""}}>
+                <div className="listOfLogs">
                     {showLogs()}
                     <>
-                        <Modal show={show} onHide={handleClose}>
+                        <Modal show={show} onHide={() => setShow(false)}>
                             <Modal.Header closeButton>
                             <Modal.Title>Confirm Delete</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>Are you sure you want to delete this log?</Modal.Body>
                             <Modal.Footer>
-                            <Button variant="dark" onClick={handleClose}>
+                            <Button variant="dark" onClick={() => setShow(false)}>
                                 Cancel
                             </Button>
                             <Button variant="danger" onClick={handleClose}>
@@ -197,7 +221,7 @@ function ViewLogUI()
                     </>
                 </div>
                 
-                <div className="selectedLog" style={{overflow:"auto"}}>
+                <div className="selectedLog">
                     {displayMainLog()}
                 </div>
             </div>
