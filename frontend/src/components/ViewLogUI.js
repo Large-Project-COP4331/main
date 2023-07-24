@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-solid-svg-icons";
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
 import jwtDecode from 'jwt-decode';
 import DisplayLog from './DisplayLog';
 
 const eye = <FontAwesomeIcon icon={faEye}/>;
 const eyeSlash = <FontAwesomeIcon icon={faEyeSlash}/>;
+const deleteIcon = <FontAwesomeIcon icon={faTrashCan}/>;
 
 function ViewLogUI()
 {
@@ -92,6 +94,9 @@ function ViewLogUI()
                     {log.location}
                     </td>
                 </td>
+                <td style={{fontSize: "15px", textAlign: 'center'}}>
+                    <i id="deleteButton" onClick={doDelete}>{deleteIcon}</i>
+                </td>
                 <td></td>
             </tr>
             </tbody>
@@ -114,6 +119,14 @@ function ViewLogUI()
         );
 
         return listItems;
+    }
+
+    // deletes a log
+    const doDelete = async event =>
+    {
+        event.preventDefault();
+
+        alert("doDelete()");
     }
 
     return(
