@@ -3,6 +3,7 @@ import {  Link } from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { useLocation } from 'react-router-dom';
 
 import NavBarLoggedIn from '../components/NavBarLoggedIn';
 import EditLogUI from '../components/EditLogUI';
@@ -13,6 +14,9 @@ const search = <FontAwesomeIcon icon={faMagnifyingGlass} />
 
 const EditLogPage = () =>
 {
+    const location = useLocation();
+    const {data} = location.state;
+
     return(
         <div className="editLogContent">
             <NavBarLoggedIn/>
@@ -46,7 +50,7 @@ const EditLogPage = () =>
 
                 <div className='editLogBottomMid'>
                     <div className="editLogBoxBottom">
-                        <EditLogUI/>
+                        <EditLogUI data={data}/>
                     </div>
                 </div>
 
