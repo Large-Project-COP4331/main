@@ -11,7 +11,7 @@ function DisplayLog({data})
     {
         event.preventDefault();
 
-        alert("doEdit()");
+        window.location.href="/editlogpage";
     };
 
     return (
