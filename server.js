@@ -218,7 +218,7 @@ app.post('/api/addlog', async (req,res,next) =>
   // Check for valid JWT.
   if (createJWT.isExpired(accessToken))
   {
-    return res.status(200).json({error:"JWT is no longer valid."});
+    return res.status(401).json({error:"JWT is no longer valid."});
   }
 
   let result = await database.insertOne
@@ -255,7 +255,7 @@ app.post('/api/searchlog', async (req,res,next) =>
   // Check for valid JWT.
   if (createJWT.isExpired(accessToken))
   {
-    return res.status(200).json({error:"JWT is no longer valid."});
+    return res.status(401).json({error:"JWT is no longer valid."});
   }
 
   let result;
@@ -305,7 +305,7 @@ app.post('/api/updatelog', async (req,res,next) =>
   // Check for valid JWT.
   if (createJWT.isExpired(accessToken))
   {
-    return res.status(200).json({error:"JWT is no longer valid."});
+    return res.status(401).json({error:"JWT is no longer valid."});
   }
 
   let result = await database.findOneAndUpdate
