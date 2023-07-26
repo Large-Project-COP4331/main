@@ -36,7 +36,7 @@ function LoggedOutUI()
                 </div>
             </div>
 
-            <div style={{height: 150}} />
+            <div className="emptySpace" />
 
             <div className="toolsProvided">
                 <div className="bigText">
@@ -47,7 +47,7 @@ function LoggedOutUI()
                         Provided<br/>
                     </span>
                 </div>
-                <div className="scubbaTools" style={{display: 'flex', flexDirection: 'row'}}>
+                <div className="scubbaTools">
                     <div className="circle1">
                         <div className="logIconCircle">
                             <img id="logIcon" src={log}/>
@@ -71,7 +71,7 @@ function LoggedOutUI()
                 </div>
             </div>
 
-            <div style={{height: 150}} />
+            <div className="emptySpace" />
 
             <div className="loggedOutBottom">
                 <div className="loggedOutBottomRegister">
