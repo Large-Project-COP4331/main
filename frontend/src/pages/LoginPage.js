@@ -61,12 +61,7 @@ function LoginPage()
                                         Logger
                                     </span>
                                     <div className="messageLogo">
-                                        <div className="SignIn" style={{color: 'black', 
-                                            fontSize: 40, 
-                                            fontWeight: '500', 
-                                            wordWrap: 'break-word', 
-                                            marginRight: '10px'}}
-                                        >
+                                        <div className="SignIn">
                                             Sign in
                                         </div>
                                         <img className="Image" style={{width: '25%'}} src={shark} />

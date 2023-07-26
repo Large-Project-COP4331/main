@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {  Link } from "react-router-dom";
 
-import logo from '../components/images/001-shark.png';
+import logo from '../components/images/006-shark-1.png';
 import Forgot from '../components/Forgot';
 
 function ForgotPage()
@@ -54,12 +54,7 @@ function ForgotPage()
                                         Logger
                                     </span>
                                     <div className="messageLogo">
-                                        <div className="SignIn" style={{color: 'black', 
-                                            fontSize: 40, 
-                                            fontWeight: '500', 
-                                            wordWrap: 'break-word', 
-                                            marginRight: '10px'}}
-                                        >
+                                        <div className="SignIn">
                                             Reset Me
                                         </div>
                                         <img className="Image" style={{width: '25%'}} src={logo} />

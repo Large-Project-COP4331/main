@@ -59,12 +59,7 @@ function RegisterPage()
                                         Logger
                                     </span>
                                     <div className="messageLogo">
-                                        <div className="SignUp" style={{color: 'black', 
-                                            fontSize: 40, 
-                                            fontWeight: '500', 
-                                            wordWrap: 'break-word', 
-                                            marginRight: '10px'}}
-                                        >
+                                        <div className="SignUp">
                                             Sign up
                                         </div>
                                         <img className="Image" style={{width: '25%'}} src={shark} />
