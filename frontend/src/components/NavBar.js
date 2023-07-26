@@ -6,7 +6,7 @@ import shark from './images/006-shark-1.png';
 
 const navbar= () =>{
   return (
-      <Navbar expand="lg" className="bg-body-tertiary overflow-visible">
+      <Navbar expand="lg" className="overflow-visible">
         <Container>
           <Navbar.Brand href="#welcome">
               <span id="blackText" style={{fontSize: 25}}>
