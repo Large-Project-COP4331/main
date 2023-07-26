@@ -10,6 +10,14 @@ import oceanfloor from './images/ocean_floor.png';
 function LoggedOutUI()
 {
 
+    // goes to registerpage
+    const doSignup = async event => 
+    {
+        event.preventDefault();
+
+        window.location.href="/registerpage";
+    };
+
     return(
         <div className="loggedOutContainer">
             <div className="loggedOutContent">
@@ -97,7 +105,12 @@ function LoggedOutUI()
                     </div>
                     <div className="loggedOutBottomRegisterButton">
                         {/**onClick={doRegister} or go to a link?*/}
-                        <input type="submit" id="registerButton" class="buttons" value = "Sign Up Now"/>
+                        <input type="submit" 
+                                id="registerButton" 
+                                className="buttons" 
+                                value = "Sign Up Now"
+                                onClick={doSignup}
+                        />
                     </div>
                 </div>
             </div>
