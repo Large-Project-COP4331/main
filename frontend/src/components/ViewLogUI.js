@@ -223,29 +223,6 @@ function ViewLogUI()
     return(
         <div id="viewLogUIDiv">
             <div className="viewLogTop">
-        
-                <div className="viewLogPagination">
-                    <div className="viewLogPgButtons">
-                        <button id="paginationBtns" 
-                                onClick={() => doPrev()}
-                                style={{marginLeft: 0}}
-                        >
-                            Prev
-                        </button>
-                        <div className="viewLogPgNum">
-                            Page <br /> 
-                            {(data !== null && data.length !== 0 ? pageNumber:0)} of  {" "}
-                            {(data !== null ? Math.ceil(data.length / displayNum):"")}
-                        </div>
-                        <button id="paginationBtns"
-                                onClick={() => doNext()}
-                                style={{marginRight: 30}}
-                        >
-                            Next
-                        </button>
-                    </div>
-                </div>
-
                 <div className="viewLogSearchLog">
                         <input
                             id="searchLogs"
@@ -264,6 +241,25 @@ function ViewLogUI()
         
             <div className="logUIContent">
                 <div className="listOfLogs">
+                    <div className="viewLogPagination">
+                        <div className="viewLogPgButtons">
+                            <button id="paginationBtns" 
+                                onClick={() => doPrev()}
+                            >
+                                Prev
+                            </button>
+                            <div className="viewLogPgNum">
+                                Page <br /> 
+                                {(data !== null && data.length !== 0 ? pageNumber:0)} of  {" "}
+                                {(data !== null ? Math.ceil(data.length / displayNum):"")}
+                            </div>
+                            <button id="paginationBtns"
+                                onClick={() => doNext()}
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </div>
                     {showLogs()}
                     <>
                         <Modal show={show} onHide={() => setShow(false)}>
