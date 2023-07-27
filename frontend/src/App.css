@@ -52,13 +52,13 @@
 }
 
 .loginContent, .forgotContent,
-.registerContent
+.registerContent, .resetContent
 {
   background-color: white;
 }
 
 .loginTop, .forgotTop,
-.registerTop
+.registerTop, .resetTop
 {
   display: flex;
   flex-direction: row;
@@ -66,7 +66,7 @@
 }
 
 .loginTopLeft, .forgotTopLeft,
-.registerTopLeft
+.registerTopLeft, .resetTopLeft
 {
   display: flex;
   flex-direction: column;
@@ -75,7 +75,7 @@
 }
 
 .loginTopMid, .forgotTopMid,
-.registerTopMid
+.registerTopMid, .resetTopMid
 {
   width: 25%;
   height: 100%;
@@ -84,13 +84,13 @@
 }
 
 .loginTopRight, .forgotTopRight,
-.registerTopRight
+.registerTopRight, .resetTopRight
 {
   width: 37.5%;
 }
 
 #loginTopMessage, #forgotTopMessage,
-#registerTopMessage
+#registerTopMessage, #resetTopMessage
 {
   color: white;
   /*background-color: pink;*/
@@ -99,7 +99,7 @@
 }
 
 .loginGoHome, .forgotGoHome,
-.registerGoHome
+.registerGoHome, .resetGoHome
 {
   height: 50px;
   margin-left: 10px;
@@ -107,7 +107,7 @@
 }
 
 .loginBoxTop, .forgotBoxTop,
-.registerBoxTop
+.registerBoxTop, .resetBoxTop
 {
   display:flex;
   flex-direction: row;
@@ -125,21 +125,21 @@
 }
 
 .loginBoxTopContent, .forgotBoxTopContent,
-.registerBoxTopContent
+.registerBoxTopContent, .resetBoxTopContent
 {
   display: flex;
   flex-direction: row;
 }
 
 .loginBoxTopLeft, .forgotBoxTopLeft,
-.registerBoxTopLeft
+.registerBoxTopLeft, .resetBoxTopLeft
 {
   margin-top: 10px;
   margin-left: 10px;
   width: 75%;
 }
 
-.SignIn, .SignUp
+.SignIn, .SignUp, .ResetPass
 {
   font-size: 40px;
   font-weight: 500;
@@ -147,14 +147,14 @@
 }
 
 .loginBoxTopRight, .forgotBoxTopRight,
-.registerBoxTopRight
+.registerBoxTopRight, .resetBoxTopRight
 {
   margin-top: 10px;
   width: 25%;
 }
 
 .loginBottom, .forgotBottom,
-.registerBottom
+.registerBottom, .resetBottom
 {
   display: flex;
   flex-direction: row;
@@ -163,19 +163,19 @@
 }
 
 .loginBottomLeft, .forgotBottomLeft,
-.registerBottomLeft
+.registerBottomLeft, .resetBottomLeft
 {
   width: 37.5%;
 }
 
 .loginBottomMid, .forgotBottomMid,
-.registerBottomMid
+.registerBottomMid, .resetBottomMid
 {
   width: 25%;
 }
 
 .loginBottomRight, .forgotBottomRight,
-.registerBottomRight
+.registerBottomRight, .resetBottomRight
 {
   width: 37.5%;
 }
@@ -337,6 +337,70 @@
 #forgotEmail
 {
   width: 100%;
+}
+
+#resetDiv{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border-style: none solid solid solid;
+  border-width: thin;
+  border-color: gray;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 100%;
+  padding: 10px 10px 10px 10px;
+}
+
+.resetForm
+{
+  width: 100%;
+}
+
+.resetField
+{
+  border-radius: 10px;
+  border-style: solid;
+  border-width: thin;
+  margin: 10px 10px 10px 10px;
+  padding: 10px 10px 10px 10px;
+}
+
+#resetButton
+{
+  width: 100%;
+}
+
+.resetInputs
+{
+  display: flex;
+  flex-direction: column;
+}
+
+#resetPassword
+{
+  width: 100%;
+}
+
+.resetPassVisibility
+{
+  position: absolute;
+  top: 28%;
+  right: 5%;
+}
+
+.resetPassVisibility:hover
+{
+  color: gray;
+  cursor: pointer;
+}
+
+.resetDivBottom
+{
+  display: flex;
+  justify-content: center;
 }
 
 #registerDiv{
@@ -1826,54 +1890,54 @@
   }
 
   /*login/register/forgot pages*/
-  .loginTopLeft, .registerTopLeft, .forgotTopLeft
+  .loginTopLeft, .registerTopLeft, .forgotTopLeft, .resetTopLeft
   {
     width: 15%;
   }
 
-  #loginTopMessage, #registerTopMessage, #forgotTopMessage
+  #loginTopMessage, #registerTopMessage, #forgotTopMessage, #resetTopMessage
   {
     display: none;
   }
 
-  .loginTopMid, .registerTopMid, .forgotTopMid
+  .loginTopMid, .registerTopMid, .forgotTopMid, .resetTopMid
   {
     width: 70%;
     margin-top: 10%;
   }
 
-  .loginTopRight, .registerTopRight, .forgotTopRight
+  .loginTopRight, .registerTopRight, .forgotTopRight, .resetTopRight
   {
     width: 15%;
   }
 
-  .loginBottomLeft, .registerBottomLeft, .forgotBottomLeft
+  .loginBottomLeft, .registerBottomLeft, .forgotBottomLeft, .resetBottomLeft
   {
     width: 15%;
   }
 
-  .loginBottomMid, .registerBottomMid, .forgotBottomMid
+  .loginBottomMid, .registerBottomMid, .forgotBottomMid, .resetBottomMid
   {
     width: 70%;
   }
 
-  .loginBottomRight, .registerBottomRight, .forgotBottomRight
+  .loginBottomRight, .registerBottomRight, .forgotBottomRight, .resetBottomRight
   {
     width: 15%;
   }
 
-  .loginBoxTopContent, .registerBoxTopContent, .forgotBoxTopContent
+  .loginBoxTopContent, .registerBoxTopContent, .forgotBoxTopContent, .resetBoxTopContent
   {
     flex-direction: column;
     
   }
 
-  .loginWelcome, .registerWelcome, .forgotWelcome
+  .loginWelcome, .registerWelcome, .forgotWelcome, .resetWelcome
   {
     flex-direction: column;
   }
 
-  .SignIn, .SignUp
+  .SignIn, .SignUp, .ResetPass
   {
     font-size: 20px;
     margin-right: 5px;
@@ -1884,14 +1948,14 @@
     flex-direction: row;
   }
 
-  .loginBoxTopRight, .registerBoxTopRight, .forgotBoxTopRight
+  .loginBoxTopRight, .registerBoxTopRight, .forgotBoxTopRight, .resetBoxTopRight
   {
     align-self: center;
     text-align: center;
     width: 100%;
   }
 
-  #loginTopMessage, #forgotTopMessage, #registerTopMessage
+  #loginTopMessage, #forgotTopMessage, #registerTopMessage, #resetTopMessage
   {
     font-size: 12px;
   }
