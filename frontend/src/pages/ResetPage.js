@@ -64,20 +64,130 @@ function ResetPage()
     }
 
     return (
-        <div>
-            <center>
-                <h1>OceanLogger</h1>
-                <h2>Reset Password Form</h2>
-            <form onSubmit={resetPassword}>
-                <input type="text" className="loginField" placeholder="New Password" 
-                    ref={(c) => newPassword = c} /><br />
-                <input type="text" className="loginField" placeholder="Confirm Password" 
-                    ref={(c) => confirmPassword = c} /><br />
-                <input type="submit" className="buttons" value = "Reset"
-                        onClick={resetPassword} /><br />
-            </form>
-            <span>{message}</span>
-            </center>
+        <div className="resetContent">
+                <div className="resetTop">
+                    <div className='resetTopLeft'>
+                        <div>
+                            <div className="loginGoHome">
+                                <Link to="/" style={{color: 'white',
+                                    textDecoration: 'none',
+                                    fontWeight: 'bold'}}
+                                >
+                                    HOME
+                                </Link>
+                            </div>
+                        </div>
+    
+                        
+                            <span id="resetTopMessage" style={{color: 'white', marginLeft: '10px'}}>
+                                <b>Reset Password</b><br/>
+                                Looks like you forgot your password.<br/>
+                                No worries, enter the email you signed up with<br/>
+                                So we can send you a password reset link<br/>
+                                That way you can contiue logging your underwater experiences!<br/>
+                            </span>
+                        
+                        
+    
+                    </div>
+    
+                    <div className='resetTopMid'>
+                        <div className="resetBoxTop">
+                            <div className="resetBoxTopContent">
+                                <div className="resetBoxTopLeft">
+                                    <div className="resetWelcome">
+                                        <span style={{color: 'black', 
+                                            fontSize: 18, 
+                                            fontWeight: '400', 
+                                            wordWrap: 'break-word'}}
+                                        >
+                                            Welcome to {""} 
+                                        </span>
+                                        <span style={{color: 'black', 
+                                            fontSize: 18, 
+                                            fontWeight: '700', 
+                                            wordWrap: 'break-word'}}
+                                        >
+                                            Scuba
+                                        </span>
+                                        <span style={{color: '#0089ED', 
+                                            fontSize: 18, 
+                                            fontWeight: '700', 
+                                            wordWrap: 'break-word'}}
+                                        >
+                                            Logger
+                                        </span>
+                                        <div className="messageLogo">
+                                            <div className="ResetPass">
+                                                Reset Password
+                                            </div>
+                                            <img className="Image" style={{width: '50%'}} src={shark} />
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+    
+                                <div className="resetBoxTopRight">
+                                    <div className="noAccountSignUp">
+                                        {/**empty space */}
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div className='resetTopRight'>
+    
+                    </div>
+                </div>
+    
+                <div className="resetBottom">
+                    <div className='resetBottomLeft'>
+                        {/**empty space */}
+                    </div>
+    
+                    <div className='resetBottomMid'>
+                        <div className="resetBoxBottom">
+                            <div id="resetDiv">
+                                <form className="resetForm" onSubmit={resetPassword}>
+                                    <div className="resetInputs">
+                                    <input type="text" 
+                                        className="resetField" 
+                                        placeholder="New Password" 
+                                        ref={(c) => newPassword = c} 
+                                    /><br />
+                                    <input type="password" 
+                                        className="resetField" 
+                                        placeholder="Confirm Password" 
+                                        ref={(c) => confirmPassword = c} 
+                                    /><br />
+                                    </div>
+    
+                                    <div className="forgotPassword">
+                                        {/**emptyspace */}
+                                    </div>
+                                    
+                                    <div className="resetDivBottom">
+                                        <input type="submit" 
+                                            id="resetButton" 
+                                            class="buttons" 
+                                            value = "Reset"
+                                            onClick={resetPassword} 
+                                        /><br />
+                                    </div>
+                                    
+                                    <span>{message}</span>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div className='resetBottomRight'>
+                        {/**empty space */}
+                    </div>
+                </div>
         </div>
     );
 }
