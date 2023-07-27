@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
+import {  Link } from "react-router-dom";
+import shark from '../components/images/006-shark-1.png';
 
 function ResetPage()
 {
