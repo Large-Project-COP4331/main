@@ -6,8 +6,10 @@
         "node": "18.x"
     },
     "scripts": {
-        "start": "node server.js",
-        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
     },
     "author": "",
     "license": "ISC",
