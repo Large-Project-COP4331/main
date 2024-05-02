@@ -1,7 +1,9 @@
-# Ocean Logger Project Group 3
-A project for COP 4331 at UCF (Summer 2023).
+# Scuba Logger 
+## Group 3 COP 4331 at UCF (Summer 2023).
 
-Visit the website: 
+## Overview
+Scuba Logger is a comprehensive tool designed to log and analyze scuba diving experiences. As the Project Manager leading a team of seven developers, this project aims to provide an intuitive and user-friendly platform for divers to track their dives, visualize data, and share insights with the community.
+
 
 ## Group Members
 + Alawi, Yousef
